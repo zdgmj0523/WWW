@@ -9,18 +9,18 @@ date_default_timezone_set('PRC');
 
 
 $post_data = array(
-    'transDate'=>"2016-11-22",
-    'transTime'=>"14:08:52",
-    'merchno'=>"678430148160002",
-    'merchName'=>"长沙辉扬百货贸易有限公司",
+    'transDate'=>"2016-11-28",
+    'transTime'=>"15:08:38",
+    'merchno'=>"678510148160009",
+    'merchName'=>"",
     'customerno'=>"null",
-    'amount'=>"0.10",
-    'traceno'=>"161122140848000002",
+    'amount'=>"1.00",
+    'traceno'=>"259490",
     'payType'=>"2",
-    'orderno'=>"900002701749",
-    'channelOrderno'=>"4006102001201611220483856687",
-    'channelTraceno'=>"100580025142201611223145862133",
-    'openId'=>"weixin://wxpay/bizpayurl?pr=MvVaveY",
+    'orderno'=>"900003001622",
+    'channelOrderno'=>"4004352001201611281083817976",
+    'channelTraceno'=>"102590008008201611286219349425",
+    'openId'=>"",
     'status'=>"1"
 );
 $temp="";
@@ -31,11 +31,11 @@ foreach ($post_data as $x=>$x_value){
         $temp = $temp.$x."=".iconv('UTF-8','GBK//IGNORE',$x_value)."&";
     }
 }
-echo 'GBK：'.$temp.'42D65AEC115AEA1372297427A21101C3'.'<br>';
+echo 'GBK：'.$temp.'504B74BB68552B2714C9B8BA5658879F'.'<br>';
 
-$md5=md5($temp.'42D65AEC115AEA1372297427A21101C3');
+$md5=md5($temp.'504B74BB68552B2714C9B8BA5658879F');
 echo '签名数据结果：'.$md5."<br>";
-if (strcasecmp($md5,"465698DC4FC893F2C84AC95CBC45E2EC")==0 ){
+if (strcasecmp($md5,"BF06CA2925642E814D924C08CB8E3352")==0 ){
     echo "验签结果：正确";
 }else{
     echo "验签结果：错误";
