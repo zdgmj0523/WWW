@@ -13,10 +13,10 @@
 </head>
 <body>
     <div id="header">
-        <select id="settleType">
-            <option value="0">t0</option>
-            <option value="1">t1</option>
-        </select>
+<!--        <select id="settleType">-->
+<!--            <option value="0">t0</option>-->
+<!--            <option value="1">t1</option>-->
+<!--        </select>-->
         <select id="payType">
             <option value="2">微信支付</option>
             <option value="1">支付宝支付</option>
@@ -25,7 +25,6 @@
         <input id="authno" placeholder="主扫授权号" type="text">
         <input type="button" id="zs" value="主扫">
         <input type="button" id="ewm" value="二维码支付">
-        <input type="button" id="wap" value="wap支付">
         <input type="button" id="gzh" value="公众号">
     </div>
 

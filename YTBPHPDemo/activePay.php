@@ -9,30 +9,14 @@ date_default_timezone_set('PRC');
 require_once "General.php";
 $amount = $_POST['num'];
 $authno = $_POST['authno'];
-$settleType = $_POST['settleType'];
 $url = 'http://112.74.230.8:8081/posp-api/activePay';//主扫接口
-
-$fee=$amount*Generals::rate;//手续费
-//手续费不能低于一份
-if ($fee<0.01){
-    $fee = 0.01;
-}
 $post_data = array(
     "amount"=>$amount,
-    'settleType'=>$settleType,
-    'fee'=>$fee,
     'authno'=>$authno,
     'merchno'=>Generals::merchno,
     'traceno'=>Generals::traceno.date('ymdhis',time()),//自定义流水号
     'notifyUrl'=>Generals::notifyUrl,
-    'certno'=>Generals::certno,
-    'mobile'=>Generals::mobile,
-    'accountno'=>Generals::accountno,
-    'accountName'=>Generals::accountName,
-    'bankno'=>Generals::bankno,
-    'bankName'=>Generals::bankName,
-    'bankType'=>Generals::bankType,
-    'goodsName'=>'中信测试',
+    'goodsName'=>'赢通宝测试',
     'remark'=>"remark"
 );
 $temp='';

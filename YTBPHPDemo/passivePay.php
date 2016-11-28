@@ -8,31 +8,14 @@
 require_once "General.php";//导入头文件
 date_default_timezone_set('PRC');
 $payType = $_POST['payType'];
-$settleType = $_POST['settleType'];
 $amount = $_POST['num'];
-
 $url = 'http://120.25.96.46:8081/posp-api/passivePay';//二维码被扫接口
-
-$fee=$amount*Generals::rate;
-//手续费不能低于一份
-if ($fee<0.01){
-    $fee = 0.01;
-}
 $post_data = array(
     "amount"=>$amount,
     'payType'=>$payType,
-    'settleType'=>$settleType,
-    'fee'=>$fee,
     'merchno'=>Generals::merchno,
     'traceno'=>Generals::traceno.date('ymdhis',time()),//自定义流水号
     'notifyUrl'=>Generals::notifyUrl,
-    'certno'=>Generals::certno,
-    'mobile'=>Generals::mobile,
-    'accountno'=>Generals::accountno,
-    'accountName'=>Generals::accountName,
-    'bankno'=>Generals::bankno,
-    'bankName'=>Generals::bankName,
-    'bankType'=>Generals::bankType,
     'goodsName'=>'中信测试',
     'remark'=>"remark"
 );

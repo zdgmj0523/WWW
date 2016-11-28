@@ -7,31 +7,16 @@
  */
 require_once "General.php";
 date_default_timezone_set('PRC');
-$payType = "2";// 公众号不支持支付宝
-$settleType = $_POST['settleType'];
 $amount = $_POST['num'];
 $url = 'http://120.25.96.46:8081/posp-api/openPay';
-$fee=$amount*Generals::rate;//手续费
-//手续费不能低于一份
-if ($fee<0.01){
-    $fee = 0.01;
-}
 $post_data = array(
-    'amount'=>$amount,
-    'payType'=>$payType,
-    'settleType'=>$settleType,
-    'fee'=>$fee,
+    "amount"=>$amount,
+    'payType'=>'2',// 公众号不支持支付宝
     'merchno'=>Generals::merchno,
     'traceno'=>Generals::traceno.date('ymdhis',time()),//自定义流水号
     'notifyUrl'=>Generals::notifyUrl,
-    'certno'=>Generals::certno,
-    'mobile'=>Generals::mobile,
-    'accountno'=>Generals::accountno,
-    'accountName'=>Generals::accountName,
-    'bankno'=>Generals::bankno,
-    'bankName'=>Generals::bankName,
-    'bankType'=>Generals::bankType,
-    'goodsName'=>'一身西装'
+    'goodsName'=>'中信测试',
+    'remark'=>"remark"
 );
 $temp='';
 ksort($post_data);//对数组进行排序

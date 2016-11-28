@@ -3,7 +3,7 @@
  */
 $(function () {
     $('#zs').click(function () {
-        var datas = 'num='+$('#num').val()+'&settleType='+$('#settleType').val()+'&authno='+$('#authno').val();
+        var datas = 'num='+$('#num').val()+'&authno='+$('#authno').val();
         $.ajax({
             type:"POST",
             url:"activePay.php",
@@ -22,7 +22,7 @@ $(function () {
     })
 
     $('#ewm').click(function () {
-        var datas = 'num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
+        var datas = 'num='+$('#num').val()+'&payType='+$('#payType').val();
         $.ajax({
             type:"POST",
             url:"passivePay.php",
@@ -52,33 +52,8 @@ $(function () {
         });
     })
 
-    $('#wap').click(function () {
-        var datas = 'num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
-        $.ajax({
-            type:"POST",
-            url:"wapPay.php",
-            data:datas,
-            dataType:"json",
-            success:function (response,xhr) {
-                // alert(response+"---"+xhr);
-                $('#merchno').html("商户号:"+response.merchno);
-                $('#respCode').html("响应码:"+response.respCode);
-                $('#message').html("响应消息:"+response.message);
-                $('#traceno').html("商户流水号:"+response.traceno);
-                $('#refno').html("渠道订单号:"+response.refno);
-                // $('#QrCode').html("二维码信息:"+response.barCode);
-                $('#remark').html("备注:"+response.remark);
-                $("#QrCode").html("跳转地址:"+response.barCode);
-            },
-            error:function (xhr,errorText,errorType) {
-                // alert(errorText+':'+errorType);
-                alert("错误:"+xhr.status+":"+xhr.statusText+":"+errorText+':'+errorType);
-            }
-        });
-    })
-
     $('#gzh').click(function () {
-        var datas = 'num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
+        var datas = 'num='+$('#num').val();
         $.ajax({
             type:"POST",
             url:"openPay.php",
