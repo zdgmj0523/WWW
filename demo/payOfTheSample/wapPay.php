@@ -1,29 +1,27 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 公众号
- * Date: 2016/10/21
- * Time: 15:39
+ * User: wap
+ * Date: 2016/10/17
+ * Time: 15:26
  */
-require_once "General.php";
+require_once "../General.php";
 date_default_timezone_set('PRC');
-$payType = "2";// 公众号不支持支付宝
-$settleType = $_POST['settleType'];
+
+$payType = '2';//wap支付 不支持支付宝
+$settleType = '1';//wap支付不支持t0
 $amount = $_POST['num'];
-$url = 'http://112.74.230.8:8081/posp-api/openPay';
-$fee=$amount*Generals::rate;//手续费
-//手续费不能低于一份
-if ($fee<0.01){
-    $fee = 0.01;
-}
+$merchno = $_POST['mer'];
+$notifyUrl = $_POST['notify'];
+$signature = $_POST['sig'];
+$url = 'http://112.74.230.8:8081/posp-api/wapPay';
 $post_data = array(
     'amount'=>$amount,
     'payType'=>$payType,
     'settleType'=>$settleType,
-    'fee'=>$fee,
-    'merchno'=>Generals::merchno,
+    'merchno'=>$merchno,
     'traceno'=>Generals::traceno.date('ymdhis',time()),//自定义流水号
-    'notifyUrl'=>Generals::notifyUrl,
+    'notifyUrl'=>$notifyUrl,
     'certno'=>Generals::certno,
     'mobile'=>Generals::mobile,
     'accountno'=>Generals::accountno,
@@ -31,7 +29,8 @@ $post_data = array(
     'bankno'=>Generals::bankno,
     'bankName'=>Generals::bankName,
     'bankType'=>Generals::bankType,
-    'goodsName'=>'一身西装'
+    'goodsName'=>'一身西装',
+    'remark'=>"remark"
 );
 $temp='';
 ksort($post_data);//对数组进行排序
@@ -42,9 +41,9 @@ foreach ($post_data as $x=>$x_value){
     }
 }
 //MD5转码
-$md5=md5($temp.Generals::signature);
+$md5=md5($temp.$signature);
 $reveiveData = $temp.'signature'.'='.$md5;
-//echo  $reveiveData;
+
 $curl = curl_init();
 //设置抓取的url
 curl_setopt($curl, CURLOPT_URL, $url);

@@ -1,24 +1,36 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: wap
- * Date: 2016/10/17
- * Time: 15:26
+ * User: 二维码
+ * Date: 2016/10/13
+ * Time: 18:01
  */
-require_once "General.php";
+require_once "../General.php";//导入头文件
 date_default_timezone_set('PRC');
-
-$payType = '2';//wap支付 不支持支付宝
-$settleType = '1';//wap支付不支持t0
+$payType = $_POST['payType'];
+$settleType = $_POST['settleType'];
 $amount = $_POST['num'];
-$url = 'http://112.74.230.8:8081/posp-api/wapPay';
+$merchno = $_POST['mer'];
+$notifyUrl = $_POST['notify'];
+$signature = $_POST['sig'];
+
+
+
+$url = 'http://112.74.230.8:8081/posp-api/passivePay';//二维码被扫接口
+
+$fee=$amount*Generals::rate;
+//手续费不能低于一份
+if ($fee<0.01){
+    $fee = 0.01;
+}
 $post_data = array(
-    'amount'=>$amount,
+    "amount"=>$amount,
     'payType'=>$payType,
     'settleType'=>$settleType,
-    'merchno'=>Generals::merchno,
+    'fee'=>$fee,
+    'merchno'=>$merchno,
     'traceno'=>Generals::traceno.date('ymdhis',time()),//自定义流水号
-    'notifyUrl'=>Generals::notifyUrl,
+    'notifyUrl'=>$notifyUrl,
     'certno'=>Generals::certno,
     'mobile'=>Generals::mobile,
     'accountno'=>Generals::accountno,
@@ -26,7 +38,7 @@ $post_data = array(
     'bankno'=>Generals::bankno,
     'bankName'=>Generals::bankName,
     'bankType'=>Generals::bankType,
-    'goodsName'=>'一身西装',
+    'goodsName'=>'中信测试',
     'remark'=>"remark"
 );
 $temp='';
@@ -37,10 +49,9 @@ foreach ($post_data as $x=>$x_value){
         $temp = $temp.$x."=".iconv('UTF-8','GBK//IGNORE',$x_value)."&";
     }
 }
-//MD5转码
-$md5=md5($temp.Generals::signature);
+$md5=md5($temp.$signature);
 $reveiveData = $temp.'signature'.'='.$md5;
-
+//echo  $reveiveData;
 $curl = curl_init();
 //设置抓取的url
 curl_setopt($curl, CURLOPT_URL, $url);

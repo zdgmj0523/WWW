@@ -1,3 +1,6 @@
+<!--
+商户号、密钥、通知地址、返回地址自己填写
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +17,11 @@
         </tr>
         <tr>
             <td>商户编号</td>
-            <td><input name="merchno" type="text" value="678350548160001"></td>
+            <td><input name="merchno" type="text" value="商户号"></td>
         </tr>
         <tr>
             <td>商户秘钥</td>
-            <td><input name="merchKey" type="text" value="2LNuUvB9EI2D6OXPcbeYhyqt8RJKWVe1"></td>
+            <td><input name="merchKey" type="text" value="密钥"></td>
         </tr>
         <tr>
             <td>订单号</td>
@@ -63,11 +66,11 @@
         </tr>
         <tr>
             <td>通知地址</td>
-            <td><input name="notifyUrl" type="text" value="http://gf-info.cn:8085/test/gateway_notify.jsp"></td>
+            <td><input name="notifyUrl" type="text" value="通知地址"></td>
         </tr>
         <tr>
             <td>返回地址</td>
-            <td><input name="returnUrl" type="text" value="http://gf-info.cn:8085/test/gateway_return.jsp"></td>
+            <td><input name="returnUrl" type="text" value="返回地址"></td>
         </tr>
         <tr>
             <td colspan="2"><div align="center">

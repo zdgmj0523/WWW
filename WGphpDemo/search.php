@@ -5,7 +5,7 @@
  * Date: 2016/11/11
  * Time: 18:14
  */
-require_once "General.php";
+require_once "Generals.php";
 date_default_timezone_set('PRC');
 $orderno = $_POST['orderno'];
 $merchno = $_POST['merchno'];
@@ -24,7 +24,7 @@ foreach ($post_data as $x=>$x_value){
         $temp = $temp . $x . "=" . iconv('UTF-8', 'GBK//IGNORE', $x_value) . "&";
     }
 }
-$md5=md5($temp.Configs::signature);
+$md5=md5($temp.Generals::signature);
 $reveiveData = 'm=query&'.$temp.'signature'.'='.$md5;
 //echo  $reveiveData;
 $curl = curl_init();

@@ -3,7 +3,7 @@
  */
 $(function () {
     $('#zs').click(function () {
-        var datas = 'mer='+$('#mer').val()+'sig='+$('#sig').val()+'return_url='+$('#return_url').val()+'num='+$('#num').val()+'&settleType='+$('#settleType').val()+'&authno='+$('#authno').val();
+        var datas = 'mer='+$('#mer').val()+'&sig='+$('#sig').val()+'&notify='+$('#notify').val()+'&num='+$('#num').val()+'&settleType='+$('#settleType').val()+'&authno='+$('#authno').val();
         $.ajax({
             type:"POST",
             url:"activePay.php",
@@ -22,13 +22,13 @@ $(function () {
     })
 
     $('#ewm').click(function () {
-        var datas = 'num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
+        var datas = 'mer='+$('#mer').val()+'&sig='+$('#sig').val()+'&notify='+$('#notify').val()+'&num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
         $.ajax({
             type:"POST",
-            url:"passivePay.php",
+            url:"../payOfTheSample/passivePay.php",
             data:datas,
             dataType:"json",
-            success:function (response,xhr) {
+            success:function (response) {
                 // alert(response+"---"+xhr);
                 $('#merchno').html("商户号:"+response.merchno);
                 $('#respCode').html("响应码:"+response.respCode);
@@ -39,10 +39,11 @@ $(function () {
                 $('#remark').html("备注:"+response.remark);
                 $("#QrCode").html(null);
                 $("#QrCode").qrcode({
-                    render: "image",
+                    render: "table",
+                    correctLevel: 0,//纠错等级
                     width: 200, //宽度
                     height:200, //高度
-                    text: response.barCode //任意内容 
+                    text: response.barCode //任意内容
                 });
             },
             error:function (xhr,errorText,errorType) {
@@ -53,10 +54,10 @@ $(function () {
     })
 
     $('#wap').click(function () {
-        var datas = 'num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
+        var datas = 'mer='+$('#mer').val()+'&sig='+$('#sig').val()+'&notify='+$('#notify').val()+'&num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
         $.ajax({
             type:"POST",
-            url:"wapPay.php",
+            url:"../payOfTheSample/wapPay.php",
             data:datas,
             dataType:"json",
             success:function (response,xhr) {
@@ -78,10 +79,10 @@ $(function () {
     })
 
     $('#gzh').click(function () {
-        var datas = 'num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
+        var datas = 'mer='+$('#mer').val()+'&sig='+$('#sig').val()+'&notify='+$('#notify').val()+'&num='+$('#num').val()+'&payType='+$('#payType').val()+'&settleType='+$('#settleType').val();
         $.ajax({
             type:"POST",
-            url:"openPay.php",
+            url:"../payOfTheSample/openPay.php",
             data:datas,
             dataType:"json",
             success:function (response) {
@@ -107,10 +108,10 @@ $(function () {
         });
     })
     $('#search').click(function () {
-        var searchData = 'mer='+$('#mer').val()+'&tra='+$('#tra').val()+'&ref='+$('#ref').val();
+        var searchData = 'sign='+$('#sign').val()+'&merc='+$('#merc').val()+'&tra='+$('#tra').val()+'&ref='+$('#ref').val();
         $.ajax({
             type:"POST",
-            url:"qrcodeQuery.php",
+            url:"../orderQuery/qrcodeQuery.php",
             data:searchData,
             dataType:"json",
             success:function (response,xhr) {

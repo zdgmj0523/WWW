@@ -1,33 +1,30 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: 二维码
- * Date: 2016/10/13
- * Time: 18:01
+ * User: XFJA_DG
+ * Date: 2016/11/17
+ * Time: 15:17
  */
-require_once "General.php";//导入头文件
 date_default_timezone_set('PRC');
-$payType = $_POST['payType'];
-$settleType = $_POST['settleType'];
+require_once "../General.php";
 $amount = $_POST['num'];
+$authno = $_POST['authno'];
+$settleType = $_POST['settleType'];
 $merchno = $_POST['mer'];
-$notifyUrl = $_POST['return_url'];
+$notifyUrl = $_POST['notify'];
 $signature = $_POST['sig'];
+$url = 'http://112.74.230.8:8081/posp-api/activePay';//主扫接口
 
-
-
-$url = 'http://112.74.230.8:8081/posp-api/passivePay';//二维码被扫接口
-
-$fee=$amount*Generals::rate;
+$fee=$amount*Generals::rate;//手续费
 //手续费不能低于一份
 if ($fee<0.01){
     $fee = 0.01;
 }
 $post_data = array(
     "amount"=>$amount,
-    'payType'=>$payType,
     'settleType'=>$settleType,
     'fee'=>$fee,
+    'authno'=>$authno,
     'merchno'=>$merchno,
     'traceno'=>Generals::traceno.date('ymdhis',time()),//自定义流水号
     'notifyUrl'=>$notifyUrl,
@@ -51,7 +48,7 @@ foreach ($post_data as $x=>$x_value){
 }
 $md5=md5($temp.$signature);
 $reveiveData = $temp.'signature'.'='.$md5;
-//echo  $reveiveData;
+//print  $reveiveData;
 $curl = curl_init();
 //设置抓取的url
 curl_setopt($curl, CURLOPT_URL, $url);
@@ -69,4 +66,3 @@ curl_close($curl);
 //return iconv('GB2312', 'UTF-8', $data);
 //显示获得的数据
 echo iconv('GBK//IGNORE', 'UTF-8', $data);
-//echo $data;

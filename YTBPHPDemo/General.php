@@ -7,9 +7,9 @@
  */
 class Generals{
     //测试商户：678110154110001
-    const merchno = '866220154110001';
+    const merchno = '888110154110001';
     //测试密钥：0123456789ABCDEF0123456789ABCDEF
-    const signature = '48BA6B6C82A8C198F7E78A96C8D5CA24';
+    const signature = '6CE940246A8497C768A695BF674DD16E';
     //测试返回通知地址：http://yanpenghou.vicp.cc/PHPDemo/payBack.php
     const notifyUrl = 'http://www.baidu.com';
     //流水号表头（自定义）

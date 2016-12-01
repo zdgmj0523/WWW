@@ -7,9 +7,9 @@
  */
 class Generals{
     //测试商户：678110154110001
-    const merchno = '678510148160009';
+    const merchno = '678110154110001';
     //测试密钥：0123456789ABCDEF0123456789ABCDEF
-    const signature = '504B74BB68552B2714C9B8BA5658879F';
+    const signature = '0123456789ABCDEF0123456789ABCDEF';
     //测试返回通知地址：http://yanpenghou.vicp.cc/PHPDemo/payBack.php
     const notifyUrl = 'http://yanpenghou.vicp.cc/PHPDemo/payBack.php';
     //流水号表头（自定义）

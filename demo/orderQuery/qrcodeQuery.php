@@ -5,12 +5,13 @@
  * Date: 2016/10/17
  * Time: 15:57
  */
-require_once "General.php";//导入头文件
+require_once "../General.php";//导入头文件
 date_default_timezone_set('PRC');
 
-$merchno = $_POST["mer"];
+$merchno = $_POST["merc"];
 $traceno = $_POST["tra"];
 $refno = $_POST["ref"];
+$signature = $_POST['sign'];
 $url = "http://112.74.230.8:8081/posp-api/qrcodeQuery";
 
 $post_data = array(
@@ -26,7 +27,7 @@ foreach ($post_data as $x=>$x_value){
         $temp = $temp.$x."=".iconv('UTF-8','GBK//IGNORE',$x_value)."&";
     }
 }
-$md5=md5($temp.Generals::signature);
+$md5=md5($temp.$signature);
 //echo $temp.Generals::signature;
 $reveiveData = $temp.'signature'.'='.$md5;
 //echo  $reveiveData;

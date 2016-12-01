@@ -6,5 +6,6 @@
  * Time: 10:38
  */
 class Generals{
+    // 0123456789ABCDEF0123456789ABCDEF
     const signature = '0123456789ABCDEF0123456789ABCDEF';//密钥
 }

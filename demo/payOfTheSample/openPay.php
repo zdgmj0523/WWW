@@ -1,30 +1,32 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: XFJA_DG
- * Date: 2016/11/17
- * Time: 15:17
+ * User: 公众号
+ * Date: 2016/10/21
+ * Time: 15:39
  */
+require_once "../General.php";
 date_default_timezone_set('PRC');
-require_once "General.php";
-$amount = $_POST['num'];
-$authno = $_POST['authno'];
+$payType = "2";// 公众号不支持支付宝
 $settleType = $_POST['settleType'];
-$url = 'http://112.74.230.8:8081/posp-api/activePay';//主扫接口
-
+$amount = $_POST['num'];
+$merchno = $_POST['mer'];
+$notifyUrl = $_POST['notify'];
+$signature = $_POST['sig'];
+$url = 'http://112.74.230.8:8081/posp-api/openPay';
 $fee=$amount*Generals::rate;//手续费
 //手续费不能低于一份
 if ($fee<0.01){
     $fee = 0.01;
 }
 $post_data = array(
-    "amount"=>$amount,
+    'amount'=>$amount,
+    'payType'=>$payType,
     'settleType'=>$settleType,
     'fee'=>$fee,
-    'authno'=>$authno,
-    'merchno'=>Generals::merchno,
+    'merchno'=>$merchno,
     'traceno'=>Generals::traceno.date('ymdhis',time()),//自定义流水号
-    'notifyUrl'=>Generals::notifyUrl,
+    'notifyUrl'=>$notifyUrl,
     'certno'=>Generals::certno,
     'mobile'=>Generals::mobile,
     'accountno'=>Generals::accountno,
@@ -32,8 +34,7 @@ $post_data = array(
     'bankno'=>Generals::bankno,
     'bankName'=>Generals::bankName,
     'bankType'=>Generals::bankType,
-    'goodsName'=>'中信测试',
-    'remark'=>"remark"
+    'goodsName'=>'一身西装'
 );
 $temp='';
 ksort($post_data);//对数组进行排序
@@ -43,9 +44,10 @@ foreach ($post_data as $x=>$x_value){
         $temp = $temp.$x."=".iconv('UTF-8','GBK//IGNORE',$x_value)."&";
     }
 }
-$md5=md5($temp.Generals::signature);
+//MD5转码
+$md5=md5($temp.$signature);
 $reveiveData = $temp.'signature'.'='.$md5;
-//print  $reveiveData;
+//echo  $reveiveData;
 $curl = curl_init();
 //设置抓取的url
 curl_setopt($curl, CURLOPT_URL, $url);
@@ -63,3 +65,4 @@ curl_close($curl);
 //return iconv('GB2312', 'UTF-8', $data);
 //显示获得的数据
 echo iconv('GBK//IGNORE', 'UTF-8', $data);
+//echo $data;
