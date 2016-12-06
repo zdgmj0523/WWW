@@ -9,23 +9,19 @@ date_default_timezone_set('PRC');
 
 
 $post_data = array(
-//    'transDate'=>"2016-11-28",
-//    'transTime'=>"15:08:38",
-    'merchno'=>"001440189990001",
-//    'merchName'=>"",
-//    'customerno'=>"null",
-    'amount'=>"0.01",
-    'traceno'=>"20161201103208",
-//    'payType'=>"2",
-//    'orderno'=>"900003001622",
-//    'channelOrderno'=>"4004352001201611281083817976",
-//    'channelTraceno'=>"102590008008201611286219349425",
-//    'openId'=>"",
-//    'status'=>"1"
-    'channel'=>'1',
-    'notifyUrl' => 'localhost:8080/A/index.jsp',
-    'returnUrl' => 'localhost:8080/A/index.jsp',
-    'settleType' => '2',
+    'transDate'=>"2016-12-02",
+    'transTime'=>"22:05:49",
+    'merchno'=>"678510148160047",
+    'merchName'=>"成都彩利虹",
+    'customerno'=>"",
+    'amount'=>"900.00",
+    'traceno'=>"49745720161202100543",
+    'payType'=>"2",
+    'orderno'=>"900003226614",
+    'channelOrderno'=>"4006882001201612021572275872",
+    'channelTraceno'=>"102510008010201612026228619466",
+    'openId'=>"weixin://wxpay/bizpayurl?pr=agBHMSg",
+    'status'=>"1",
 
 );
 $temp="";
@@ -36,11 +32,11 @@ foreach ($post_data as $x=>$x_value){
         $temp = $temp.$x."=".iconv('UTF-8','GBK//IGNORE',$x_value)."&";
     }
 }
-echo 'GBK：'.$temp.'28480E19DD2B42DA011D1A65DD22ECAA'.'<br>';
+echo 'GBK：'.$temp.'C3B283E75B28D5017CE12BE7BD5B6A05'.'<br>';
 
-$md5=md5($temp.'28480E19DD2B42DA011D1A65DD22ECAA');
+$md5=md5($temp.'C3B283E75B28D5017CE12BE7BD5B6A05');
 echo '签名数据结果：'.$md5."<br>";
-if (strcasecmp($md5,"BF06CA2925642E814D924C08CB8E3352")==0 ){
+if (strcasecmp($md5,"CB1A243ECC63BDC05547A33EB6BB5AE6")==0 ){
     echo "验签结果：正确";
 }else{
     echo "验签结果：错误";

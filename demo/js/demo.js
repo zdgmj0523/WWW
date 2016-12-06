@@ -6,7 +6,7 @@ $(function () {
         var datas = 'mer='+$('#mer').val()+'&sig='+$('#sig').val()+'&notify='+$('#notify').val()+'&num='+$('#num').val()+'&settleType='+$('#settleType').val()+'&authno='+$('#authno').val();
         $.ajax({
             type:"POST",
-            url:"activePay.php",
+            url:"../payOfTheSample/activePay.php",
             data:datas,
             dataType:"json",
             success:function (response) {

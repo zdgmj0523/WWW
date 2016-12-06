@@ -13,6 +13,9 @@ fwrite($file, $str);//写入字符串
 
 $data = file_get_contents('php://input');//接受post原数据
 $post_data = array();
+$ip = $_SERVER['REMOTE_ADDR'];
+fwrite($file,"ip地址：".$ip."\n");
+fwrite($file,"--------------------------------------------------------------\n");
 foreach ($_POST as $key=>$value){
     $post_data = array_merge($post_data,array(iconv('GBK//IGNORE','UTF-8',$key)=>iconv('GBK//IGNORE','UTF-8',$value)));
 }
@@ -31,6 +34,8 @@ foreach ($post_data as $x=>$x_value){
 }
 $md5=strtoupper(md5($temp.'0123456789ABCDEF0123456789ABCDEF'));
 fwrite($file,"验签加密数据：".$md5."\n");
+
+$data_resoult="";
 if ($md5 == $_POST['signature'] ){
     echo "success";
     fwrite($file,"验签结果：正确\n");
@@ -39,3 +44,5 @@ if ($md5 == $_POST['signature'] ){
     fwrite($file,"验签结果：错误\n");
 }
 fclose($file);
+?>
+

@@ -11,7 +11,7 @@ class Generals{
     //测试密钥：0123456789ABCDEF0123456789ABCDEF
     const signature = '0123456789ABCDEF0123456789ABCDEF';
     //测试返回通知地址：http://yanpenghou.vicp.cc/PHPDemo/payBack.php
-    const notifyUrl = 'http://yanpenghou.vicp.cc/PHPDemo/payBack.php';
+    const notifyUrl = 'http://zdgmj0523.ticp.net/demo/payBack.php';
     //流水号表头（自定义）
     const traceno = '888000';
 

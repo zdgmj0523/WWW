@@ -63,7 +63,7 @@
         </tr>
         <tr>
             <td>通知地址</td>
-            <td><input name="notifyUrl" type="text" value="http://yanpenghou.vicp.cc/WGphpDemo/payBack.php"></td>
+            <td><input name="notifyUrl" type="text" value="http://zdgmj0523.ticp.net/demo/payBack.php"></td>
         </tr>
         <tr>
             <td>返回地址</td>

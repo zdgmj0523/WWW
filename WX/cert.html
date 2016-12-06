@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0 minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <title>实名认证</title>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <script src="js/jquery.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js">
+    </script>
+    <script type="text/javascript" src=js/ajaxfileupload.js>
+    </script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js">
+    </script>
+    <script
+            src="http://api.map.baidu.com/api?v=2.0&ak=uHd8GbjadapWKgGMXjuwQkPw">
+    </script>
+    <script>
+
+        function showMessage(text) {
+            $("#message").text(text);
+            $("#message").show();
+            scroll(0, 0);
+        }
+
+        function hideMessage() {
+            $("#message").hide();
+        }
+        $.ajax({
+            url: '/xfja/queryCertStatus?customerno=' + getQueryString('id'),
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                if (data.status == 0) {
+                } else if (data.status == '1') {
+                    if (data.auditStatus != '2' && data.judgStatus != '2') {
+                        alert("资料正在审核中，请等待审核！");
+                        wx.closeWindow();
+                    }
+                } else {
+                    alert("您已认证成功，无需重复提交资料！");
+                    wx.closeWindow();
+                }
+            },
+            error: function (data, status, e) {
+                alert("fail");
+
+            }
+        });
+        $(function () {
+            hideMessage();
+            $.ajax({
+                url: '/xfja/getInfo?id=' + getQueryString('id'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $.ajax({
+                        url: '/xfja/getMobile?id=' + getQueryString('id'),
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.respCode == '00') {
+                                document.getElementById("mobile").innerHTML = data.mobile;
+                                document.getElementById("mobile").value = data.mobile;
+                            }
+                        },
+                        error: function (data, status, e) {
+                            alert("fail");
+
+                        }
+                    });
+
+                    document.getElementById("adress").innerHTML = data.province + data.city;
+                    document.getElementById("opname").innerHTML = data.nickname;
+                    var div = document.getElementById("iconback");
+                    div.style.backgroundImage = "url(" + data.headimgurl + ")";
+                },
+                error: function (data, status, e) {
+                    alert("fail");
+
+                }
+            });
+
+        });
+
+        $.ajax({
+
+            url: '/xfja/wxTransaction?action=jsConfig&url=' + location.href.split("#")[0],
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                wx.config({
+                    debug: false,
+                    appId: data.appId,
+                    timestamp: data.timestamp,
+                    nonceStr: data.nonceStr,
+                    signature: data.signature,
+                    jsApiList: ['scanQRCode', 'getLocation', 'closeWindow', 'hideOptionMenu', 'chooseImage', 'previewImage', 'uploadImage']
+                });
+            },
+            error: function (data, status, e) {
+                alert("fail");
+            }
+        });
+
+        wx.ready(function () {
+            wx.hideOptionMenu();
+            wx.checkJsApi({
+                jsApiList: ['getLocation'],
+                success: function (res) {
+                    if (res.checkResult.getLocation == true) {
+                        wx.getLocation({
+                            success: function (res) {
+                                $.ajax({
+                                    url: 'http://restapi.amap.com/v3/geocode/regeo?key=57d4d289c9dde398c5889cde6999b958&location=' + res.longitude + ',' + res.latitude,
+                                    method: 'GET',
+                                    dataType: 'json',
+                                    success: function (data) {
+
+                                        var loc = data.regeocode;
+                                        $("#addr1").val(loc.formatted_address);
+                                        $("#addr2").val(loc.addressComponent.adcode);
+                                    }
+                                });
+                            },
+                            cancel: function (res) {
+                                alert('用户拒绝授权获取地理位置');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+        function locations() {
+            $.ajax({
+                url: 'http://restapi.amap.com/v3/geocode/regeo?key=57d4d289c9dde398c5889cde6999b958&location=116.481488,39.990464',
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var ac = data.regeocode;
+                    alert(ac.addressComponent.adcode);
+                }
+            });
+        }
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        }
+        // 在最后一个值后面添加多一个
+    </script>
+    <style type="text/css">
+        .textares {
+            width: 100%;
+            resize: none;
+        }
+
+        .roo {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="iconback" class="header bottom-line"
+     style="background:#e5e5e5  no-repeat 15px 10px;background-size: 60px 60px;">
+    <span> <b id="opname"> </b> </span> <br> <span id="adress"
+                                                   class="f80"> </span>
+</div>
+<div>&nbsp;</div>
+<div id="message" name="message" class="row bottom-line"
+     style="padding-left:15px display:none"></div>
+<div class="space-day">商户信息</div>
+<div class="row bottom-line" style="padding-left:15px">
+    <b type="text" id="mobile" name="mobile" placeholder="手机号码"/>
+</div>
+<div class="row bottom-line">
+    <input type="text" id="contact" name="contact" placeholder="真实姓名"
+           value=""/>
+</div>
+<div class="row bottom-line">
+    <input type="text" id="sname" name="sname" placeholder="商户名称"/>
+</div>
+<div class="row bottom-line">
+    <input type="text" id="addr1" name="addr1" placeholder="商户地址"/>
+</div>
+<div class="row bottom-line" style="display:none">
+    <input type="text" id="addr2" name="addr2" placeholder="地区编码"/>
+</div>
+<div class="row bottom-line">
+    <input type="tel" id="idcardnum" name="idcardnum" placeholder="证件号码"/>
+</div>
+<div class="space-day">银行账号信息</div>
+<div class="row bottom-line">
+    <input type="text" id="cardnumber" name="cardnumber"
+           onchange="cardqu(this)" placeholder="结算银行卡帐号"/>
+</div>
+<div class="row bottom-line">
+    <input type="text" id="bankname" name="bankname" placeholder="开户行别"
+           value=""/>
+</div>
+<div class="row bottom-line">
+    <input type="text" id="bname" name="bname" placeholder="银行帐号持有人"
+           value=""/>
+</div>
+<div class="row bottom-line">
+    <select id="proven" name="proven" class="bank-picker"
+            onchange="selproven(this)">
+        <option value="" selected="selected">请选择省份</option>
+    </select>
+</div>
+<div class="row bottom-line">
+    <select id="city" name="city" class="bank-picker"
+            onchange="selcity(this)">
+        <option value="">请选择城市</option>
+    </select>
+</div>
+
+<div class="row4 bottom-line">
+    <div class="menu" id="bankcity" onclick="menu();">请选择开户支行</div>
+    <ul id="citybank1" style="display:none;list-style:none;">
+    </ul>
+
+</div>
+<script type="text/javascript">
+    var ul = $("#citybank1");
+    function menu() {
+
+        $("#checkagree").hide();
+        ul.toggle();
+
+
+    }
+    function x(id) {
+        $("#bankcity").val(id.innerHTML);
+        $("#bankcity").html(id.innerHTML);
+        if (ul.is(":visible")) {
+            ul.hide();
+            $("#checkagree").toggle();
+        }
+    }
+</script>
+<div class="row4 bottom-line">
+    <div class="row3 bottom-line">
+        <p>身份证正面照</p>
+    </div>
+    <div class="row3 bottom-line">
+        <p>身份证反面照</p>
+    </div>
+    <div class="row3 bottom-line">
+        <p>手持身份证和银行卡</p>
+    </div>
+</div>
+<div class="row1 bottom-line">
+    <div class="row2 bottom-line">
+        <img src="img/demo_sfz_1.png"/>
+    </div>
+    <div class="row2 bottom-line">
+        <img src="img/img_10.png"/>
+    </div>
+    <div class="row2 bottom-line">
+        <img src="img/dde.png"/>
+    </div>
+    <div class="row1 bottom-line">
+        <p>示例照片</p>
+    </div>
+</div>
+<div class="row1 bottom-line">
+    <div class="row2 bottom-line">
+        <img src="img/img.png" onclick="javascript:card1File.click()"
+             id="img1"/> <input id=" card1Img" name="card1Img" type="hidden"/>
+        <input id="card1File" name="card1File" value="浏览"
+               style="display:none" accept="image/*;capature=camera"/>
+    </div>
+    <div class="row2">
+        <img src="img/img.png" onclick="javascript:card2File.click()"
+             id="img2"/> <input id=" card2Img" name="card2Img" type="hidden"/>
+        <input id="card2File" name="card2File" type="file" value="浏览"
+               style="display:none" onchange="fileupload(this,'img2','card2Img')"/>
+    </div>
+    <div class="row2 bottom-line">
+        <img src="img/img.png" onclick="javascript:card3File.click()"
+             id="img3"/> <input id=" card3Img" name="card3Img" type="hidden"/>
+        <input id="card3File" name="card3File" type="file" value="浏览"
+               style="display:none" onchange="fileupload(this,'img3','card3Img')"/>
+    </div>
+</div>
+<div class="space-day">阅读协议</div>
+<div class="roo" style="display:none" id="xieyi">
+		<textarea class="textares" id="agress" clos="5" rows="20"
+                  readonly="readonly"> 马上收钱服务协议
+	特别提示：  
+	本协议由马上收钱和你确认，在完成本平台的商户注册时起，本协议具有合同法律效力。  
+	在使用扫码支付服务（下称“本服务”）前，你应当认真阅读并遵守本协议。  
+	请你务必审慎阅读并充分理解各条款内容，特别是免除或者限制责任的条款、争议解决和法律适用条款。免除或者限制责任的条款可能以加粗字体显示，你应重点阅读。除非你已阅读并接受本协议所有条款，否则你无权使用本服务。你使用本服务即视为你已阅读并同意本协议的约束。如你对本协议有任何疑问的，应向客服咨询。
+	 
+	 
+	一、 服务内容  
+	1.1我方为提供马上收钱服务；  
+	1.2由我方为你提供扫码支付业务所需相关服务:  
+	⑴及时对支付终端进行维护，并协助解决甲方在使用过程中遇到的技术问题。  
+	⑵供扫码支付操作流程。  
+	在壹信支付，支付宝扫码业务，京东钱包，百度钱包支付以及QQ钱包规则规定的时间内提供交易投诉、查询、查复、差错处理及账务调整等服务。  
+
+	二、 服务费用  
+
+	2．1银行卡交易手续费由壹信支付，支付宝支付，京东钱包，百度钱包，QQ钱包根 据中国人民银行的有关规定在银行卡交易资金清分中进行分配；  
+	2．2按照中国人民银行的有关规定，你方银行卡交易净金额（已扣除商户入网时已签约的费率相应的手续费）在你方消费支付交易成功后（支付终端显示屏显示“支付成功”字样及显示“交易单号”）划拨至你方指定的账户中，清算数据以银联银行卡交易电子数据为准；
+	 
+	2.3对于因壹信、支付宝、京东、QQ钱包或百度钱包等系统错误等原因而导致的错误入账，你方有义务配合调查并返还相应款项，我方有权暂延支付银行卡交易款项，并有权追讨已支付的银行卡交易款项。
+	 
+	2.4你方需提供符合规定的收款账户，若你方需变更账户，需提前3天提交修改收款信息的申请，我方按你方提出的变更新的银行卡账户更改系统注册，并从修改完成即刻起按新的账户划拨甲方银行卡交易资金
+	；  
+	2.5若遇国家政策调整，或中国人民银行、合作机构的政策调整，我方有权据此调整支付手续费率并对你进行通知，你在收到我方通知后三个工作日内对调整后的支付手续费率未提出书面异议的，按调整后的费率执行。双方无法就费率变更达成一致意见的，可终止本协议。
+	 
+
+	第三条 权利与义务  
+
+	3.1你方应提供你本人身份证所开立的银行账户，作为结算账户。  
+	 
+	3.2你方有义务向我方提供经年检的营业执照、国税和地税登记证、法定代表身份证明或者个人身份证件、营业执照、摊位租赁协议、借记卡入账账户，以及我方认为必要的其他文件。你方保证所填写的申请书和所提供的资料真实、完整。
+	 
+	3.3身份验证和授权。你使用本服务，即表明你同意我方和财付通，支付宝等第三方平台收集、记录和使用你使用本服务过程中产生的相关信息和数据，包括但不限于你的身份信息、账户信息和交易信息等。我方有权将前述信息提交国家机关和金融机构进行身份验证和鉴权，同时，为更好地提供服务，我方和财付通，支付宝等第三方平台及关联公司有权在法律允许的范围内自行收集、记录、使用上述信息和数据。
+	 
+	3.4延迟结算。我方发现你可能存在洗钱、恐怖融资、欺诈交易、信用卡套现、恶意倒闭或其他违法违规行为，或我方发现你存在异常交易或存在争议交易时，我方可以对你商户号中的相应资金进行延迟结算。对于延迟结算的资金，直至排除违法违规嫌疑时，财付通我方才恢复该部分资金的结算。你的行为导致我方遭受损失的，你还应当承担所有赔偿责任。
+	 
+	3.5账号开立和身份验证。你在注册我方商户时，应向我方如实提供相关经营资质资料，包括但不限于营业执照、税务登记证、组织机构代码证、法定代表人身份证明等，若你从事国家规定专营、专控或需要取得国家前置行政许可的经营活动，还应提供该相关资质证照。你应保证所提交的上述资料的准确性、真实性、完整性。你的上述信息发生变更，或迁址、停业、变更域名或联系电话等资料信息，应提前书面通知我方，否则，我方有权视具体情况暂停服务，你未及时通知导致的一切投诉和纠纷，均由你方承担。
+	 
+	3.6你方财务人员每天应对当日发生的支付终端交易总额与所划拨至指定银行卡账户的交易资金进行核对，如有不符，应及时向我方反映；  
+	3.7你方对持卡人使用扫码支付费用必须与支付现金一视同仁，不得采用不同价格或提供低于采用现金支付水平的服务。你方不得将应付的扫码交易手续费转嫁给持卡人，由此所造成的经济损失由你方承担。
+	 
+	3.8真实交易背景。你承诺发起的本服务交易基于真实的交易，不得利用本产品从事虚假交易。  
+	3.9保存订单信息。你应保证订单信息的合法性、真实性、准确性和完整性。  
+	3.10在正常业务范围内，你方同意我方使用其风险信息，同时你方有责任向我方提供有关银卡诈骗案件中必要的线索和证据，并协助我方和有关部门处理案件。
+	 
+	3.11反套现、反洗钱。你不得主动或协助持卡人进行信用卡套现、洗钱、交易分单等违法经营行为，不得出现虚假申请、恶意倒闭等严重风险行为，否则，我方有权暂停或终止提供本协议服务，并将你的信息报送至中国人民银行和公安部及相关监管机构。
+	 
+	 
+	四、 免责条款  
+	 
+	4.1
+	因受不可抗力影响而不能履行或不能完全履行本协议的一方可以免除责任。不可抗力是指本协议各方不能预见、不能避免、不能克服的客观情况。此外，鉴于网络之特殊属性，发生包括但不限于下列任何情形导致我方不能履行本协议下义务的，各方可以免责：
+	 
+	（1）黑客攻击、计算机病毒侵入或发作；  
+	（2）计算机系统遭到破坏、瘫痪或无法正常使用而导致信息或纪录的丢失、支付宝或财付通等第三方平台不能提供本协议项下之服务的；  
+	（3）电信部门技术调整导致之重大影响的；  
+	（4）因政府管制而造成服务终止的；  
+	（5）其它非各方原因造成的。  
+	4.2 遇上述不可抗力事件的任何一方，应将该事件立即书面通知其他方。各方按照事件对协议履行的影响程度，再行决定是否继续履行本协议。  
+	 
+	五、风险提示及特别约定  
+	 
+	5.1
+	各方对于“中国国内电子商务环境尚未成熟，电子商务立法以及信用体制还不完善”的现状以及开展电子商务业务存在的风险性均完全知悉，各方均承诺采取合理的风险防范措施，以尽量避免或减小风险。
+	 
+	5.2 本服务交易过程中，你应积极防范银行卡持卡人拒付风险，及时解决交易中出现的问题：  
+	（1）若在交易中如出现包括但不限于交易不真实、欺诈、伪冒交易、持卡人账户信息泄漏或你违反国家法律规定或你违反对用户的承诺以及你违反与我方的约定之情形，你应自行承担上述情形造成的全部损失；
+	 
+	（2）若在交易中如出现持卡人否认交易、持卡人拒付之情形的，你应依据要求向我方提供相应的交易凭证，若你怠于提供凭证，或你提供的凭证不符合相关行业内标准，或在我方通知（含电子邮件通知）后你未及时停止可疑交易、控制相应资金的等，你应自行承担上述情形造成的全部损失。
+	 
+	你因上述情形给我方造成损失的，我方有权直接从你的待结算款项中扣划，若不足以赔偿的，可以继续向你追偿。  
+	5.3 你在进行支付交易的过程中，应严格遵守中国人民银行网上银行业务和信用卡交易相关的政策法规，不得进行虚假交易、非法套现、洗钱等行为。  
+	 
+	六、 协议变更  
+	 
+	我方有权根据需要不时地制定、修改本协议，如本协议有任何变更，我方将对变更事项在商户平台进行公告。如你不同意相关变更，必须立即以书面的方式通知我方终止为你提供服务。任何修订或新协议一经在我方公众平台上公布即生效。你登录或继续使用服务即表示你接受经修订的协议。
+	 
+	 
+	七、 协议变更与解除  
+	 
+	本协议在下列情况下解除：  
+	7.1双方协商同意解除本协议  
+	7.2甲方出现违反本协议的情形，乙方向甲方发出书面解除通知之日本协议解除；  
+	7.3缔约一方如因除上述其他原因需终止本协议时，必须提前30日以书面方式通知另一方。在此期间，双方必须继续履行本协议直至完成在协议期间发生的一切未了责任后，协议方可终止。
+	 
+	 
+	八、 附则  
+	 
+	8.1本协议受中华人民共和国法律、法规和条例约束。  
+	8.2 你方声明：我方已采取合理方式提请其注意本协议（含附件及填写项）的全部条
+	款，并对此作出了说明，你方自愿同意按照本协议的规定行使权力和履行责任与义务。  
+	8.3你方承担本协议项下的所有相关费用。  
+	 
+	</textarea>
+</div>
+<div class="row">
+
+    <p class="xieyi" onclick="agree()">马上收钱服务协议</p>
+</div>
+
+<input type="checkbox" id="checkagree" name="checkgree" class="check1"/>同意协议条款
+
+<div class="row">
+    <div class="btn green" onclick="signUp()">
+        立&nbsp;即&nbsp;认&nbsp;证
+    </div>
+</div>
+<div class="row f80 tac">&copy; 2016 马上收钱</div>
+<script>
+    var bankcode;
+    var islock;
+    var a = 1;
+    function agree() {
+        if (a == 1) {
+            $("#xieyi").show();
+            a = 2;
+        } else {
+            $("#xieyi").hide();
+            a = 1;
+        }
+
+    }
+    function cardqu(obj) {
+
+
+        var datas = "action=bankType&cardNo=" + obj.value;
+        $.ajax({
+            url: '/xfja/query',
+            method: 'post',
+            data: datas,
+            dataType: 'json',
+            success: function (data) {
+                if (data.respCode == '00') {
+                    var bankname = document.getElementById("bankname");
+                    bankname.value = JSON.parse(data.result).bankName;
+                    bankcode = JSON.parse(data.result).bankCode;
+
+                    var selid1 = document.getElementById("proven");
+                    selid1.options.length = 0;
+                    var opp2 = new Option();
+                    opp2.text = "请选择省份";
+                    opp2.selected = "selected";
+                    selid1.add(opp2);
+                    var datas = "action=pro";
+                    $.ajax({
+                        url: '/xfja/query',
+                        method: 'post',
+                        data: datas,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.respCode == '00') {
+                                var selid = document.getElementById("city");
+                                selid.options.length = 0;
+                                var opp1 = new Option();
+                                opp1.text = "请选择城市";
+                                opp1.selected = "selected";
+                                selid.add(opp1);
+                                var ss = data.result.substring(1, data.result.length - 1).replace(/\"/g, "").split(",");
+                                for (var i = 0; i < ss.length; i++) { //循环添加多个值
+                                    var opp = new Option(ss[i], ss[i]);
+                                    opp.name = ss[i];
+                                    selid1.add(opp);
+                                }
+
+                            }
+                        }
+                    });
+                    // 						alert(bankcode);
+                    // 					WeixinJSBridge.invoke('closeWindow',{},function(res){});
+                }
+            }
+        });
+        //return true;
+    }
+    var datas = "action=pro";
+    $.ajax({
+        url: '/xfja/query',
+        method: 'post',
+        data: datas,
+        dataType: 'json',
+        success: function (data) {
+            if (data.respCode == '00') {
+                var selid = document.getElementById("proven");
+                var ss = data.result.substring(1, data.result.length - 1).replace(/\"/g, "").split(",");
+                for (var i = 0; i < ss.length; i++) { //循环添加多个值
+                    var opp = new Option(ss[i], ss[i]);
+                    opp.name = ss[i];
+                    selid.add(opp);
+                }
+
+            }
+        }
+    });
+    function selproven(obj) {
+
+        var datas1 = "action=city&proName=" + obj.value;
+        $.ajax({
+            url: '/xfja/query',
+            method: 'post',
+            data: datas1,
+            dataType: 'json',
+            success: function (data) {
+                if (data.respCode == '00') {
+                    var selid = document.getElementById("city");
+                    selid.options.length = 0;
+                    var opp1 = new Option();
+                    opp1.text = "请选择城市";
+                    opp1.selected = "selected";
+                    selid.add(opp1);
+                    var jsonO = eval("(" + data.result + ")");
+                    for (var i = 0; i < jsonO.length; i++) { //循环添加多个值
+
+                        var opp = new Option(jsonO[i].value, jsonO[i].code);
+                        opp.name = jsonO[i].code;
+                        selid.add(opp);
+                    }
+                }
+            }
+        });
+    }
+
+    function selcity(obj) {
+
+        var data2 = "action=bankName&bankCode=" + bankcode + "&cityCode=" + obj.value;
+        $.ajax({
+            url: '/xfja/query',
+            method: 'post',
+            data: data2,
+            dataType: 'json',
+            success: function (data) {
+                if (data.respCode == '00') {
+                    $("#citybank1").find("li").remove();
+                    var jsonO = eval("(" + data.result + ")");
+                    var bankname = document.getElementById("bankname");
+
+                    for (var i = 0; i < jsonO.length; i++) { //循环添加多个值
+                        $("#citybank1").append("<li value='" + jsonO[i].value + "'  onclick='x(this)'>" + jsonO[i].value + "</li>")
+
+
+                    }
+                } else {
+                }
+            }
+        });
+    }
+
+    function signUp() {
+        hideMessage();
+        if (islock) {
+            alert("已认证,请等待审核!");
+            return;
+        }
+
+        if (!checkagree.checked) {
+            showMessage("请同意马上收钱服务协议");
+            return false;
+        }
+        if (!$("#sname").val()) {
+            showMessage("请填写商户名称");
+            return false;
+        }
+
+        if (!$("#addr1").val()) {
+            showMessage("请填写商户地址");
+            return false;
+        }
+
+        if (!$("#addr2").val()) {
+            var addres1 = $("#addr1").val();
+            $.ajax({
+                url: 'http://restapi.amap.com/v3/geocode/geo?key=57d4d289c9dde398c5889cde6999b958&address=' + addres1,
+
+                method: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    var loc = data.geocodes[0];
+                    $("#addr2").val(loc.adcode);
+                }
+            });
+
+        }
+        if (!$("#addr2").val()) {
+            document.getElementById("addr2").value = "110106";
+        }
+
+        if (!$("#contact").val()) {
+            showMessage("请填写真实姓名");
+            return false;
+        }
+
+        var m = $("#mobile").val();
+
+        if (!m) {
+            showMessage('请输入联系人手机号');
+            return;
+        } else if (m.length != 11) {
+            showMessage('请输入完整联系人手机号');
+            return;
+        } else {
+            m = m.replace(/\s+/g, "");
+        }
+        if ($("#idcardnum").val().length != 18) {
+            showMessage("请填写正确身份证号");
+            return false;
+        }
+
+        if (!$("#bankcity").val()) {
+            showMessage("请选择开户银行");
+            return false;
+        }
+        if (!$("#bname").val()) {
+            showMessage("请填写银行开户名");
+            return false;
+        }
+
+        if ($("#a_mch_type").val() == "0") {
+            showMessage("请选择银行账号类型");
+            return false;
+        }
+        if (!$("#img1").val()) {
+            showMessage("请上传身份证正面照");
+            return false;
+        }
+
+        if (!$("#img2").val()) {
+            showMessage("请上传身份证反面照");
+            return false;
+        }
+
+        if ($("#img3").val() == "0") {
+            showMessage("请上传在店手持身份证和结算卡照片");
+            return false;
+        }
+
+        var cn = $("#cardnumber").val();
+
+        if (!cn) {
+            showMessage("请填写银行帐号");
+            return false;
+        } else {
+            cn = cn.replace(/\s+/g, "");
+        }
+
+        fl_s = '{"wx3":' + $("#fl_wx").val() / 1000 + ',"ali":' + $("#fl_ali").val() / 1000 + ',"jd":' + $("#fl_jd").val() / 1000 + ',"baidu":' + $("#fl_bd").val() / 1000 + ',"qq":' + $("#fl_qq").val() / 1000 + ',"best":' + $("#fl_yi").val() / 1000 + '}';
+        hideMessage();
+
+        var addr = $("#addr1").val() + $("#addr2").val();
+
+        if (confirm("请仔细核对银行信息，否则无法正常收款\n\n" + $("#bname").val() + "\n" + $("#bank").find("option:selected").text() + "\n" + $("#cardnumber").val()) == false) {
+            return false;
+        }
+
+        var url = '/xfja/cert';
+        var datas = "userName=" + m + "&merchId=" + m + "&trueName=" + $("#contact").val() + "&merchName=" + $("#sname").val() + "&idcard=" + $("#idcardnum").val() + "&accountno=" + $("#cardnumber").val() + "&accountName=" + $("#bname").val() + "&bankName=" + $("#bankcity").val() + "&areaCode=" + $("#addr2").val() + "&merchAddress=" + $("#addr1").val() + "&cert1Path=" + $("#img1").val() + "&cert2Path=" + $("#img2").val() + "&cert3Path=" + $("#img3").val();
+        $.ajax({
+            url: url,
+            method: 'post',
+            data: datas,
+            dataType: 'json',
+            success: function (data) {
+                if (data.respCode == '00') {
+                    showMessage(data.message);
+                    islock = '1';
+                    wx.closeWindow();
+                } else {
+                    showMessage('认证失败:' + data.message);
+                }
+            }
+        });
+    }
+
+
+    function validateID(target) {
+        target.value = target.value.replace(/[^\d\*]/g, '');
+    }
+    function fileupload(ids, img, card) {
+        wx.chooseImage({
+            count: 1, // 默认9
+            sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+                var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+            }
+        });
+
+        if (validateImage(ids)) {
+            var viewImg = document.getElementById(img);
+            viewImg.width = "60";
+            viewImg.height = "60";
+            viewImg.src = "img/loading.gif";
+            $.ajaxFileUpload({
+                url: "/xfja/file",
+                timeout: 3000,
+                //超时时间设置，单位毫秒
+                secureuri: false,
+                // 				data:data321,
+                fileElementId: ids.id,
+                dataType: 'json',
+                // 				type	: 'POST',
+                success: function (data) {
+                    var viewFiles = ids;
+                    var viewImg = document.getElementById(img);
+                    viewImg.value = data.filePath;
+                    //alert(viewImg.value);
+                    function viewFile(file) {
+                        //通过file.size可以取得图片大小
+                        var reader = new FileReader();
+                        reader.onload = function (evt) {
+                            viewImg.src = evt.target.result;
+                        }
+                        reader.readAsDataURL(file);
+                    }
+
+                    viewFile(viewFiles.files[0]);
+                },
+                error: function (data, status, e) {
+
+                }
+            });
+
+        }
+        // 	 var data321 = { name: 'my name', description: 'short description' }
+    }
+    function validateImage(obj) {
+        var file = obj;
+        var tmpFileValue = file.value;
+
+        //校验图片格式
+        if (/^.*?\.(png|jpg|jpeg|bmp)$/.test(tmpFileValue.toLowerCase())) {
+            var fileSize = obj.files[0].size
+            var imgSize = 1024 * 5000;
+
+            if (file.value != "") {
+                if (fileSize <= 0 || fileSize > imgSize) {
+                    alert("当前文件大小" + fileSize / 1024 + "KB, 超出最大限制 " + imgSize / 1024 + "KB");
+                    return false;
+                } else {
+
+                    return true;
+                }
+                img.src = file.value;
+                return true;
+            } else {
+                alert("请选择上传的文件!");
+                return false;
+            }
+        } else {
+            alert("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
+            return false;
+        }
+    }
+</script>
+</body>
+
+</html>

@@ -11,11 +11,11 @@
     </style>
 </head>
 <body>
-<div id="first" >
+<div id="first"  >
     <h2>支付示例</h2>
     <a>商户号：</a><input id="mer" placeholder="商户号" type="text" value="678110154110001"><br><br>
-    <a>密钥：</a><input id="sig" placeholder="密钥" type="text" style="width: 200px" value="0123456789ABCDEF0123456789ABCDEF"><br><br>
-    <a>通知地址：</a><input id="notify" placeholder="通知地址" type="text" style="width: 350px" value="http://yanpenghou.vicp.cc/demo/payBack.php">
+    <a>密钥：</a><input id="sig" placeholder="密钥" type="text" style="width: 200px" value="0123456789ABCDEF0123456789ABCDEF" ><br><br>
+    <a>通知地址：</a><input id="notify" placeholder="通知地址" type="text" style="width: 350px" value="http://zdgmj0523.ticp.net/demo/payBack.php">
 </div>
 <br>
 <div id="header">
@@ -35,7 +35,7 @@
     <input type="button" id="gzh" value="公众号">
 </div>
 <br>
-<div id="main" style="height: 300px">
+<div id="main" style="height: 300px" >
     <div id="leftDiv"  style=" position:absolute;left: 30%;width: 300px;height: 250px">
         <p id="merchno"></p>
         <p id="refno"></p>
@@ -49,7 +49,3 @@
 </div>
 </body>
 </html>
-
-<?php
-
-?>
