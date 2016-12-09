@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>支付示例</title>
-    <script type="application/javascript" src="js/jquery-3.1.1.min.js"></script>
-    <script type="text/javascript" src="js/demo.js"></script>
+    <script type="application/javascript" src="../js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/WGdemo.js"></script>
 </head>
 <body onload="ceshi()">
-<form name="form" method="post" action="order_submit.php" target="_blank">
+<form name="form" method="post" action="order_submit.php" target="_self">
     <table width="500"  border="1" cellspacing="0" cellpadding="0">
         <tr>
             <th colspan="2" scope="col">网关订单测试</th>
@@ -63,7 +63,7 @@
         </tr>
         <tr>
             <td>通知地址</td>
-            <td><input name="notifyUrl" type="text" value="http://zdgmj0523.ticp.net/WGphpDemo/payBack.php"></td>
+            <td><input name="notifyUrl" type="text" value="http://home.jinkavip.com/wgTestFile/PayBack.php"></td>
         </tr>
         <tr>
             <td>返回地址</td>

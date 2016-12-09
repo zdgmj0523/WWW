@@ -1,13 +1,12 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: xiaodu
- * Date: 2016/10/19
- * Time: 15:02
+ * User: XFJA
+ * Date: 2016/12/9
+ * Time: 16:02
  */
 date_default_timezone_set('PRC');
-require_once "General.php";
-$file  = fopen("myLog.log","w");//要写入文件的文件名
+$file  = fopen("PayBack.log","w");//要写入文件的文件名
 $str = "          ********************************************************".'<br>'."\n          *                 [".date('Y-m-d H:i:s')."]                *".'<br>'."\n*******************************************************************************.".'<br>'."\n";
 fwrite($file, $str);//写入字符串
 $data = file_get_contents('php://input');//接受post原数据
@@ -25,12 +24,15 @@ $temp='';
 ksort($post_data);//对数组进行排序
 //遍历数组进行字符串的拼接
 foreach ($post_data as $x=>$x_value){
-    if ($x != 'signature'&& $x_value != null){
+    if ($x != 'signature'&& $x_value != null && $x_value != 'null'){
         $temp = $temp.$x."=".$x_value."&";
     }
 }
-fwrite($file,$temp.Generals::signature.'<br>'."\n");
-$md5=strtoupper(md5(iconv('UTF-8','GBK//IGNORE',$temp.Generals::signature)));
+$sigFile=fopen("signa.log","r");
+$datademo = fread($sigFile, filesize("signa.log"));
+fclose($sigFile);
+fwrite($file,$temp.$datademo.'<br>'."\n");
+$md5=strtoupper(md5(iconv('UTF-8','GBK//IGNORE',$temp.$datademo)));
 fwrite($file,"验签加密数据：".$md5.'<br>'."\n");
 
 if ($md5 == $_POST['signature'] ){

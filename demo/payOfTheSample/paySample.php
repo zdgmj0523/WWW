@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,11 +11,11 @@
     </style>
 </head>
 <body>
-<div id="first"  >
+<div id="first" >
     <h2>支付示例</h2>
-    <a>商户号：</a><input id="mer" placeholder="商户号" type="text" value="678110154110001"><br><br>
-    <a>密钥：</a><input id="sig" placeholder="密钥" type="text" style="width: 200px" value="0123456789ABCDEF0123456789ABCDEF" ><br><br>
-    <a>通知地址：</a><input id="notify" placeholder="通知地址" type="text" style="width: 350px" value="http://zdgmj0523.ticp.net/demo/payBack.php">
+    <a>商户号：</a><input id="mer" placeholder="商户号" type="text" value="678350548160001"><br><br>
+    <a>密钥：</a><input id="sig" placeholder="密钥" type="text" style="width: 200px" value="2LNuUvB9EI2D6OXPcbeYhyqt8RJKWVe1" ><br><br>
+    <a>通知地址：</a><input id="notify" placeholder="通知地址" type="text" style="width: 350px" value="http://home.jinkavip.com/PayBackFiles/payBack.php">
 </div>
 <br>
 <div id="header">
@@ -45,7 +45,11 @@
         <p id="remark"></p>
     </div>
     <br>
-    <div id="QrCode" style="position:relative;left: 60%;width: 200px; background-color:blue;"></div>
+    <div id="QrCode" style="position:relative;left: 60%;width: 200px;"></div>
 </div>
+<div id="buttom" style="text-align: center">
+    <input id="buttom" type="button" value="查看交易通知数据" onclick="infomation()">
+</div>
+<div id="aa" style="left: 100px"></div>
 </body>
 </html>

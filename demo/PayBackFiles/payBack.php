@@ -6,7 +6,6 @@
  * Time: 15:02
  */
 date_default_timezone_set('PRC');
-require_once "General.php";
 $file  = fopen("myLog.log","w");//要写入文件的文件名
 $str = "          ********************************************************".'<br>'."\n          *                 [".date('Y-m-d H:i:s')."]                *".'<br>'."\n*******************************************************************************.".'<br>'."\n";
 fwrite($file, $str);//写入字符串
@@ -29,8 +28,11 @@ foreach ($post_data as $x=>$x_value){
         $temp = $temp.$x."=".$x_value."&";
     }
 }
-fwrite($file,$temp.Generals::signature.'<br>'."\n");
-$md5=strtoupper(md5(iconv('UTF-8','GBK//IGNORE',$temp.Generals::signature)));
+$sigFile=fopen("signature.log","r");
+$datademo = fread($sigFile, filesize("signature.log"));
+fclose($sigFile);
+fwrite($file,$temp.$datademo.'<br>'."\n");
+$md5=strtoupper(md5(iconv('UTF-8','GBK//IGNORE',$temp.$datademo)));
 fwrite($file,"验签加密数据：".$md5.'<br>'."\n");
 
 if ($md5 == $_POST['signature'] ){

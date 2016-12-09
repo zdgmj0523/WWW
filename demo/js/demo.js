@@ -51,6 +51,12 @@ $(function () {
                 // alert("错误:"+xhr.status+":"+xhr.statusText+":"+errorText+':'+errorType);
             }
         });
+        $.ajax({
+            type: "POST",
+            url: "../PayBackFiles/signature.php",
+            data: datas,
+            dataType: "json"
+        })
     })
 
     $('#wap').click(function () {
@@ -127,3 +133,21 @@ $(function () {
     })
     
 })
+
+function infomation() {
+    var request=null;
+    if(window.XMLHttpRequest){request=new XMLHttpRequest();}else if(window.ActiveXObject){request=new ActiveXObject("Microsoft.XMLHTTP");}
+    if(request){
+        request.open("GET","../PayBackFiles/mylog.log",true);
+        request.onreadystatechange=function(){
+            if(request.readyState===4){
+                if (request.status == 200 || request.status == 0){
+                    document.getElementById("aa").innerHTML=request.responseText;
+                }
+            }
+        }
+        request.send(null);
+    }else{
+        alert("error");
+    }
+}

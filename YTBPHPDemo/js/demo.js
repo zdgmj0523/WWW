@@ -42,10 +42,10 @@ $(function () {
                     render: "image",
                     width: 200, //宽度
                     height:200, //高度
+                    correctLevel: 0,//纠错等级
                     text: response.barCode //任意内容 
                 });
-            },
-            error:function (xhr,errorText,errorType) {
+            }, error:function (xhr,errorText,errorType) {
                 // alert(errorText+':'+errorType);
                 // alert("错误:"+xhr.status+":"+xhr.statusText+":"+errorText+':'+errorType);
             }
@@ -101,3 +101,27 @@ $(function () {
     })
     
 })
+
+function infomation() {
+    var request=null;
+    if(window.XMLHttpRequest){request=new XMLHttpRequest();}else if(window.ActiveXObject){request=new ActiveXObject("Microsoft.XMLHTTP");}
+    if(request){
+        request.open("GET","mylog.log",true);
+        request.onreadystatechange=function(){
+            if(request.readyState===4){
+                if (request.status == 200 || request.status == 0){
+                    document.getElementById("aa").innerHTML=request.responseText;
+                }
+            }
+        }
+        request.send(null);
+    }else{
+        alert("error");
+    }
+}
+function traceno() {
+    var date = new Date();
+    var result = date.getFullYear()+''+(date.getMonth()+1)+''+date.getDate()+''+date.getHours()+''+date.getMinutes()+''+date.getSeconds();
+    // alert(result);
+    document.getElementById("traceno").value='CeShi_'+result;
+}

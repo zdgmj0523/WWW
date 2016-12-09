@@ -12,7 +12,7 @@ $str = "          ********************************************************"."\n 
 fwrite($file, $str);//写入字符串
 
 $data = file_get_contents('php://input');//接受post原数据
-$post_data = array('merchno'=>$_POST['merchno']);
+$post_data = array();
 foreach ($_POST as $key=>$value){
     $post_data = array_merge($post_data,array(iconv('GBK//IGNORE','UTF-8',$key)=>iconv('GBK//IGNORE','UTF-8',$value)));
 }

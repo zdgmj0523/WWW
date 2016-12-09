@@ -7,7 +7,6 @@
  */
 require_once "../General.php";//导入头文件
 date_default_timezone_set('PRC');
-
 $merchno = $_POST["merc"];
 $traceno = $_POST["tra"];
 $refno = $_POST["ref"];
