@@ -1,0 +1,927 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/pwd.css">
+<!--个人中心 start-->
+<div class="account-info" style="height:4em">
+	<div style="width:50%;float:left;line-height:3em;text-align:center"> 
+		<em style="color:#fff;font-size:1.5em">个人资产：<span>￥ <a style="color:yellow" href="{:U('User/memberinfo')}"><span id="usprice"><if condition="$user.price neq 0" >{$user.price}<else/>0.0</if></span></a></span></em> 
+	</div>
+	<!--div style="width:35%;float:left;line-height:3em;text-align:center">
+		<em style="color:#fff;font-size:1.5em">交易券 ：<span><a style="color:yellow" href="{:U('User/experiencelist')}"><if condition="$user.exper neq 0" >{$user.exper}<else/>0</if></a></span>&nbsp;张</em>
+	</div-->
+	<div style="width:20%;float:right;text-align:center;font-size:2em;line-height:3em">
+		<a href="{:U('User/recharge')}" style="display:block;width:60px;height:1.5em;background:#e64545;border-radius:5px;color:#fff;line-height:1.5em">充值</a>
+	</div>
+</div>
+<!--个人中心 end-->
+<div class="wrap" style="overflow:scroll;overflow-x:hidden;">
+	<div class="index" style="height: auto;">
+		<input type="hidden" id="tpqh" value="1">
+		<input type="hidden" id="rate1" value="{$rate.0.rate}">
+        <input type="hidden" id="rate2" value="{$rate.1.rate}">
+		<input type="hidden" id="rate3" value="{$rate.2.rate}">
+		<input type="hidden" id="price1" value="">
+        <input type="hidden" id="price2" value="">
+		<input type="hidden" id="price3" value="">
+		<input type="hidden" id="counts" value="{$count}">
+    <!-- 账户有建仓订单时显示所有没有平仓的订单 -->
+    <empty name="nolist">
+    <else /> 
+		<div class="jryk">
+			<div class="yk_left">今日盈亏(元)</div>
+			<div class="yk_con"></div>
+			<div class="yk_right box2">
+                 <!-- <a href="javascript:;" class="bounceIn">查看交易</a> -->
+                 <!--a href="{:U('Detailed/dtrading')}" class="bounceIn">交易记录</a-->
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="b-line noclearfix" style="margin-bottom:0;" id="useror">
+			<table width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="15%" style="font-size:1.2em">价格盈亏</td>
+					<td width="15%" style="font-size:1.5em">建仓价</td>
+					<td width="24%" style="font-size:1.5em">产品</td>
+					<td width="11%" style="font-size:1.5em">方向</td>
+					<td width="0%" style="display:none"></td>
+					<td width="25%" style="font-size:1.5em">操作</td>
+				</tr>
+				<volist name="nolist" id="on">
+				<!-- 油 -->
+				<if condition="$on.cid eq 1">  
+				<tr class="ykzf openpay">
+					<td class="Profit1" style="font-size:1.5em">--</td>
+					<td class="ykzfwave" style="display:none">{$on.wave}</td>
+					<td class="ykzfostyle" style="display:none">{$on.ostyle}</td>
+					<td class="ykzfeid" style="display:none">{$on.eid}</td>
+					<td class="ptitle" style="display:none">{$on.ptitle}</td>
+					<td class="uprice" style="display:none">{$on.uprice}</td>
+					<td class="oid" style="display:none">{$on.oid}</td>
+					<td style="display:none" class="yincangyoujia latest-price"></td>
+					<td class="buyprice" style="font-size:1.5em">{$on.buyprice}</td>  
+					<input type="hidden" id="Profit11" value="{$on.buyprice}">                   
+					<td style="font-size:1em">{$on.ptitle}</td>
+					<td><if condition="$on.ostyle eq 1"><font style="font-size:1.5em" color="#2fb44e">跌</font><else/><font style="font-size:1.5em" color="#ed0000">涨</font></if> </td> 
+					<td class="onumber" style="width:0px;display:none">{$on.onumber}</td>              
+					<td class="endprofit" style="width:0px;display:none">{$on.endprofit}</td>              
+					<td class="endloss" style="width:0px;display:none">{$on.endloss}</td>              
+					<td class="mypwd-btn chr">
+						<a href="{:U('Detailed/orderid')}?orderid={$on.oid}" class="red hide1" data-cid='{$on.cid}' data-oid='{$on.oid}'  >平仓</a>
+						<a href="javascript:void(0);" class="blue hide1" data-onumber='{$on.onumber}' data-oid='{$on.oid}' data-zy='{$on.endprofit}' data-zk='{$on.endloss}' >设置</a>
+						<div style="clear: both;"></div>
+					</td>
+				</tr>  
+				</if>
+				<!-- 银-->
+				<if condition="$on.cid eq 2">  
+					<tr class="ykzf1 openpay" > 
+						<td class="Profit2" style="font-size:1.5em">--</td>
+						<td class="ykzfwave" style="display:none">{$on.wave}</td>
+						<td class="ykzfostyle" style="display:none">{$on.ostyle}</td>
+						<td class="ykzfeid" style="display:none">{$on.eid}</td>
+						<td class="ptitle" style="display:none">{$on.ptitle}</td>
+						<td class="uprice" style="display:none">{$on.uprice}</td>
+						<td class="oid" style="display:none">{$on.oid}</td>      
+						<td style="display:none" class="ycbaiyinjia latest-price"></td>
+						<td class="buyprice2" style="font-size:1.5em">{$on.buyprice}</td>    
+						<input type="hidden" id="Profit22" value="{$on.buyprice}">                   
+						<td style="font-size:1em">{$on.ptitle}</td>
+						<td >  <if condition="$on.ostyle eq 1"><font style="font-size:1.5em" color="#2fb44e">跌</font><else/><font style="font-size:1.5em" color="#ed0000">涨</font></if> </td> 
+						<td class="onumber" style="display:none">{$on.onumber}</td>   
+						<td class="endprofit" style="width:0px;display:none">{$on.endprofit}</td>              
+						<td class="endloss" style="width:0px;display:none">{$on.endloss}</td>						
+						<td class="mypwd-btn chr">
+							<a href="{:U('Detailed/orderid')}?orderid={$on.oid}" class="red hide1" data-cid='{$on.cid}' data-oid='{$on.oid}'>平仓</a>
+							<a href="javascript:void(0);" class="blue hide1" data-onumber='{$on.onumber}' data-oid='{$on.oid}' data-zy='{$on.endprofit}' data-zk='{$on.endloss}' >设置</a>
+							<div style="clear: both;"></div>
+						</td>
+					</tr>  
+				</if>
+				<!-- 铜 -->
+				<if condition="$on.cid eq 3">  
+					<tr class="ykzf2 openpay" > 
+						<td class="Profit3" style="font-size:1.5em">--</td>
+						<td class="ykzfwave" style="display:none">{$on.wave}</td>
+						<td class="ykzfostyle" style="display:none">{$on.ostyle}</td>
+						<td class="ykzfeid" style="display:none">{$on.eid}</td>
+						<td class="ptitle" style="display:none">{$on.ptitle}</td>
+						<td class="uprice" style="display:none">{$on.uprice}</td>
+						<td class="oid" style="display:none">{$on.oid}</td>     
+						<td style="display:none" class="yctojia latest-price"></td>   
+						<td class="buyprice3" style="font-size:1.5em">{$on.buyprice}</td>
+						<td style="font-size:1em">{$on.ptitle}</td>
+						<input type="hidden" id="Profit33" value="{$on.buyprice}">
+						<td>  <if condition="$on.ostyle eq 1"><font style="font-size:1.5em" color="#2fb44e">跌</font><else/><font style="font-size:1.5em" color="#ed0000">涨</font></if> </td>
+						<td class="onumber" style="display:none">{$on.onumber}</td>   
+						<td class="endprofit" style="width:0px;display:none">{$on.endprofit}</td>              
+						<td class="endloss" style="width:0px;display:none">{$on.endloss}</td>
+						<td class="mypwd-btn chr">
+							<a href="{:U('Detailed/orderid')}?orderid={$on.oid}" class="red hide1" data-cid='{$on.cid}' data-oid='{$on.oid}'>平仓</a>
+							<a href="javascript:void(0);" class="blue hide1" data-onumber='{$on.onumber}' data-oid='{$on.oid}' data-zy='{$on.endprofit}' data-zk='{$on.endloss}' >设置</a>
+							<div style="clear: both;"></div>
+						</td>
+					</tr>  
+				</if> 
+				</volist>
+			</table>
+		</div>
+	</empty> 
+	
+	
+	<div style="width:100%;height: 200px;;overflow:hidden;margin-top:15px;">
+		<div class="switch-product">
+			<ul class="product-box-nav clearfix">
+				<li style="33.3%" class="sw_active" value="1"><a>米盘指数</a> </li>
+				<li style="33.3%" value="2"> <a>美指</a> </li>
+				<li style="33.3%" value="3"> <a>米精铜</a> </li>
+			</ul>
+		</div>
+
+		<div id="product-box-all">
+			<div class="product-box" value="1">
+			<!--***黄金***-->
+			<div class="trade-box">
+				<div class="price-info clearfix">
+					<h3 class="price-current"  style="text-align: center;"> <span style="font-size: 1rem;"></span>
+					<if condition="$isopen eq 0">
+					<em>休市</em>
+					<else/>
+					<em class="" id="youjia"></em>
+					</if>
+					</h3>
+				</div>
+				<div style="padding-top: 1.2em;">
+					<volist name="goods" id="vo">
+						<if condition="$vo.cid eq 1">
+							<div class="prtv">
+								<div class="prtv_info" style="text-align:center">
+									<input type="hidden" value="{$vo.pid}">
+									<h4><span class="vouprice">{$vo.uprice}</span>元/手</h4>
+									<h3>{$vo.ptitle}</h3>
+									<h5>波动盈亏：{$vo.wave}元</h5>
+								</div>
+								<div>
+									<a onclick="maymoney(this)" class="prtra" style="background:#ff0000;" adc="{$vo.feeprice}" value="涨">买涨<img src="__IMG__/tu_4.png" /></a>
+									<a onclick="maymoney(this)" class="prtra" style="background:green" adc="{$vo.feeprice}" value="跌">买跌<img src="__IMG__/tu_5.png" /></a>
+								</div>
+							</div>
+						</if>
+					</volist>
+				</div>
+			</div>
+		</div>
+		    <div class="product-box silver_con" value="2">
+			<!---白银-->
+			<div class="trade-box" >
+			<div class="price-info clearfix">
+				<h3 class="price-current"  style="text-align: center;"> <span style="font-size: 1rem;"></span>
+				<if condition="$isopen eq 0">
+				<em>休市</em>
+				<else/>
+				<em class="rise" id="baiyinjia"></em>
+				</if>
+				</h3>
+			</div>
+			<div style="padding-top: 1.2em;">
+				<volist name="goods" id="vo">
+					<if condition="$vo.cid eq 2">
+						<div class="prtv">
+							<div class="prtv_info" style="text-align:center">
+								<input type="hidden" value="{$vo.pid}">
+								<h4><span class="vouprice">{$vo.uprice}</span>元/手</h4>
+								<h3>{$vo.ptitle}</h3>
+								<h5>波动盈亏：{$vo.wave}元</h5>
+							</div>
+							<div>
+								<a onclick="maymoney(this)" class="prtra" style="background:#ff0000;" adc="{$vo.feeprice}" value="涨">买涨<img src="__IMG__/tu_4.png" /></a>
+								<a onclick="maymoney(this)" class="prtra" style="background:green" adc="{$vo.feeprice}" value="跌">买跌<img src="__IMG__/tu_5.png" /></a>
+							</div>
+						</div>
+					</if>
+				</volist>
+			</div>
+		  </div>
+		</div>
+			<div class="product-box" value="3">
+		
+    	<!--铜-->
+      <div class="trade-box" >
+        <div class="price-info clearfix">
+          <h3 class="price-current"  style="text-align: center;"> 
+            <!--升-->
+              <if condition="$isopen eq 0">
+              <em>休市</em>
+              <else/>
+                  <em class="rise" id="tojia"></em>
+              </if>
+          </h3>
+
+        </div>
+
+		<div style="padding-top: 1.2em;">
+				<volist name="goods" id="vo">
+					<if condition="$vo.cid eq 3">
+						<div class="prtv">
+							<div class="prtv_info" style="text-align:center">
+								<input type="hidden" value="{$vo.pid}">
+								<h4><span class="vouprice">{$vo.uprice}</span>元/手</h4>
+								<h3>{$vo.ptitle}</h3>
+								<h5>波动盈亏：{$vo.wave}元</h5>
+							</div>
+							<div>
+								<a onclick="maymoney(this)" class="prtra" style="background:#ff0000;" adc="{$vo.feeprice}" value="涨">买涨<img src="__IMG__/tu_4.png" /></a>
+								<a onclick="maymoney(this)" class="prtra" style="background:green" adc="{$vo.feeprice}" value="跌">买跌<img src="__IMG__/tu_5.png" /></a>
+							</div>
+						</div>
+					</if>
+				</volist>
+			</div>
+      </div>
+    </div>
+		
+	</div>
+	</div>
+	<script>
+     $(function(){
+
+	    $(".product-box-nav li a").eq(0).addClass('sw_active').siblings().removeClass("sw_active");
+          $("#product-box-all .product-box").eq(0).show().siblings().hide();
+
+          $(".product-box-nav li a").click(function () {
+              $(this).addClass("sw_active").siblings().removeClass("sw_active");
+              var index = $(this).index();
+               $("#product-box-all .product-box").eq(index).show().siblings().hide();
+          });
+	    })
+	</script>
+<!--描述：购买弹窗-->
+<div class="box">
+    <div id="dialogBg"></div>
+    <div id="dialog" class="">
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn" id="claseDialogBtn">关闭</a>
+        </div>
+        <!--建仓确认-->
+          <div class="pop-box none" id="buildBox" style="display: block;top:5rem;margin-top:35px;">
+            <nav class="pop-nav "> <a href="javascript:;" class="back" id="claseDialogBtn"></a>
+              <h3>确认购买</h3>
+            </nav>
+            <form id="jcForm" class="build-form" method="post" ><!-- action="{:U('Detailed/addorder')}" -->
+              <div class="b-line clearfix">
+                <label class="b-label">选择数量：</label>
+                <p class="num-list   clearfix" id="jcsh"> <span class="num-left"></span>
+                  <input type="text" value="1" class="num-in" readonly id="sls" disabled="">
+                  <span class="num-right"></span> </p>
+                <p class="price clearfix"> <span>方向：</span> <em class="fx"><span id="zhd" style="font-size:1.1em"></span></em>
+                  <!--降-->
+                  <!--<em class="drop">3.983</em>-->
+                </p>
+              </div>
+              <div class="b-line clearfix">
+                <label class="b-label">品种：</label>
+                <div class="type-choose clearfix">
+               <!--   <a class="t-left"  onclick="zyclick('z')">加</a>  -->
+                    <div class="type-list clearfix">
+                      <ul class="p-baiyin" style="margin-top: 0px;">
+                        <li id="opname" class="xz6" data-l="2" data-bz="200" data-pid="6" data-sxf="30.0" data-juan="0"></li>
+                      </ul>
+                    </div>
+                <!--   <a class="t-right" onclick="zyclick('you')">减</a>  --></div>
+                <p class="price clearfix"> <span>当前价格：</span>
+                <em class="c-13" id="ydangqianj" style="display:none;color:#333"></em> 
+                <em class="c-13" id="bdangqianj" style="display:none;color:#333"></em> 
+                <em class="c-13" id="tdangqianj" style="display:none;color:#333"></em>
+                <em id="dqcid" style="display:none"></em>
+               <!--  <em class="c-13" id="dangqianj">0</em>  -->
+                <!-- <em class="c-13  c-you  none rise" style="display: inline;">2053.6</em> -->
+                  <!--降-->
+                  <!--<em class="drop">3.983</em>-->
+                </p>
+              </div>
+              <div class="b-line clearfix" style="display:none">
+                <p class="c-c-l clearfix">
+                  <input type="checkbox" id="choose" value="">
+                  <label for="choose" id="mychoose"></label>
+                </p>
+                <em class="c-c-i">使用&nbsp;<img src="__IMG__/ticket-small.png">&nbsp;<i class="c11" id="c11">200</i>元体验劵(<span style="font-size:0.8em">一次只能使用一张</span>)</em> </div>
+              <div class="b-line clearfix" style="display:none">
+                <label class="b-label"></label>
+                <p class="num-list clearfix" id="yingjia">
+                  <input type="text" value="1" class="num-in" style="margin-left:30px" readonly="">
+                </p>
+                <input type="hidden" name="juansl" value="0" id="juansl">
+                <p class="b-info">剩&nbsp;<span class="big" id="big">0</span>&nbsp;张</p>
+              </div>
+
+              <div class="b-line clearfix">
+                <label class="b-label">所用费用：</label>
+                <p class="pay"><span id="opprice">0</span>元</p>
+                <input type="hidden" name="sxf" id="sxf" value="30.0">
+                <p class="b-info">手续费&nbsp;<span id="j-5">0</span>&nbsp;元&nbsp;<!--img src="__IMG__/qrgm.png" style="height:20px" id="shuoming"--></p>
+              </div>
+
+              <input type="hidden" name="type" value="" id="type" >
+              <input type="hidden" name="bz" value="2" id="bz">
+              <input type="hidden" name="sl" value="1" id="sl">
+              <input type="hidden" name="ordernumber" value="">
+              <input type="hidden" name="product" value="6" id="product">
+              <input type="hidden" name="jine" value="{$user.price}" id="jine">
+              <input type="hidden" name="isJuan" value="" id="isJuan">
+              <span style="display:none;color:red;font-size:0.7em;text-align:center" id="numss"></span>
+              <input type="hidden" class="pwd-btn  conform" id="conform1" value="确 认">
+              <!--余额不足，去充值-->
+              <a href="{:U('User/recharge')}" class="pwd-btn chr failure  none" id="conform2">余额不足，去充值</a>
+              <!--a href="{:U('Index/index')}" class="pwd-btn chr failure  none" style="display: none;" id="conform3">此商品已购买</a-->
+            </form>
+          </div>
+
+</div>
+</div>
+<!--购买弹窗结束-->
+<div class="box">
+    <div id="dialogBg2"></div>
+    <div id="dialog2" class="">
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn">关闭</a>
+        </div>
+        <!--建仓确认-->
+		<div class="pop-box none" id="buildBox2" style="display: block;margin-top:-295px;">
+			<nav class="pop-nav"> <a href="javascript:;" class="backtop" id="claseDialogBtn2"></a>
+			  <h3>设置止盈/止损</h3>
+			</nav>
+			<form id="jccg" class="build-form" method="post" action="{:U('Index/edityk')}" autocomplete="off">
+				<div class="b-line">
+					<label class="b-label">确认数量：</label>
+					<p class="num qrsl">{$order.onumber}</p>
+				</div>
+				<div class="b-profit">
+				<p class="b-p-t">止盈</p>
+				<ul class="toclearfix">
+					<li value="0">不设</li>
+					<li value="10">10%</li>
+					<li value="20">20%</li>
+					<li value="30">30%</li>
+					<li value="40">40%</li>
+					<li value="50">50%</li>
+				</ul>
+				<p class="b-p-t">止损</p>
+				<ul class="myclearfix">
+					<li value="0">不设</li>
+					<li value="10">10%</li>
+					<li value="20">20%</li>
+					<li value="30">30%</li>
+					<li value="40">40%</li>
+					<li value="50">50%</li>
+				</ul>
+			</div>
+				<input type="hidden" name="oid" value="" id="buyid">
+				<input type="hidden" name="zy" value="" id="zy">
+				<input type="hidden" name="zk" value="" id="zk">
+				<input type="submit" class="pwd-btn" value="保存设置" onclick="baocun()">
+			</form>
+		</div>
+
+</div>
+
+</div>
+
+    <div class="info-box">
+      <div class="info-d">
+        <div class="trend-box">
+          <div class="trend-chart" style="cursor: default;">
+ 
+          </div>       
+        </div>
+         <ul class="trend-nav clearfix TimeMenu" style="margin-top:1em">
+            <li><a href="javascript:void(0)" data-interval='1' data-type="area" class="cur changed">分时图</a></li>
+            <li><a href="javascript:void(0)" data-interval='5' data-type="candlestick">5分钟</a></li>
+            <li><a href="javascript:void(0)" data-interval='30' data-type="candlestick">30分钟</a></li>
+            <li><a href="javascript:void(0)" data-interval='1h' data-type="candlestick">1小时</a></li>
+            <li><a href="javascript:void(0)" data-interval='1d' data-type="candlestick">日线</a></li>
+          </ul>
+      </div>
+    </div>
+
+</div>
+  <!--遮罩层-->
+</div>
+ <!--弹窗开始-->
+<link rel="stylesheet" href="__CSS__/common.css"/>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+var w,h,className;
+function getSrceenWH(){
+  w = $(window).width();
+  h = $(window).height();
+  $('#dialogBg').width(w).height(h);
+  $('#dialogBg2').width(w).height(h);
+  $('#dialogBg3').width(w).height(h);
+}
+window.onresize = function(){  
+  getSrceenWH();
+} 
+$(window).resize();  
+
+$(function(){
+	getSrceenWH();
+	//关闭弹窗
+	$('#claseDialogBtn').click(function(){
+		$('#dialogBg').fadeOut(200,function(){
+		  $('#dialog').addClass('bounceOutUp').fadeOut(200);
+		});
+	});
+});
+//建仓
+function maymoney(obj){ 
+		but = $(obj).attr('value'); //获取选择是涨还是跌的值
+		$('#zhd').html(but);
+		var pid = "";
+		var pid= $(obj).parent().prev().children("input").val();//获取项目ID
+		var vouprice= $(obj).parent().prev().find("h4 span").html();//获取单价
+		var ubalance = $('#usprice').html();//获取可用余额
+		//买涨，买跌的时候执行。
+		$(".product-box").each(function(){
+			var status = $(this).attr('status');
+			if(status=="mark"){
+				var wfee = $(obj).attr('adc');
+				if(eval(ubalance)<=eval(vouprice+'+'+wfee)){
+					 $(".conform").attr("type","hidden");
+					 $("#conform2").show();
+				}else{
+					$(".conform").attr("type","submit");
+					$("#conform2").hide();
+				}
+			   $.ajax({  
+					type: "post",  
+					url: "{:U('Index/selectid')}",
+					data:"pid="+pid,  
+					async:false,  
+					success: function(data) { 
+						 if(data['cid']==1){
+							$('#ydangqianj').css('display',"block");
+							$('#dqcid').html(1);
+						 }else if(data['cid']==2){
+							$('#bdangqianj').css('display',"block");
+							$('#dqcid').html(2);
+						 }else{
+							$('#tdangqianj').css('display',"block");
+							$('#dqcid').html(3);
+						 }
+						 $('#opname').html(data['ptitle']); 
+						 $('#opprice').html(data['uprice']);  
+						 $('#j-5').html(data['feeprice']);
+						 $('#c11').html(data['uprice']);  
+						 $('#big').html(data['sum']);
+						 $('#pid').val(data['pid']); 
+						 
+						 //算加减传的值
+						 $('#bz').val(data['uprice']); 
+						 $('#sxf').val(data['feeprice']); 
+						 $('#juansl').val(data['sum']);
+						 $('#type').val(pid);                 
+						  
+					},  
+					error: function(data) {  
+						
+					}  
+				});
+			}
+		});
+		/*var mypid=$('#type').val();//商品id
+		$.ajax({
+			type:'post',
+			url:"{:U('Detailed/judgment')}",
+			data:{"mypid":mypid},
+			async:false, 
+			success:function(data){
+				if (data==99) {
+					$('#conform1').attr("type","hidden");
+					$('#conform2').css('display','none');
+					$('#conform3').css('display','block');
+				}
+			}
+		});*/
+
+		className = $(this).attr('class');
+		$('#dialogBg').fadeIn(200);
+		$('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn(200);
+
+	}
+</script>
+<script type="text/javascript">
+
+setInterval('pcprice()', 1000);
+/*function pingcang(oid,youjia,sum,buyprice,ykzj,uprice){
+	var oid=oid;//订单id
+	var youjia=youjia;//油现价
+	var bdyy=sum;  //需要给数据库添加的金额
+	var jiancj=buyprice;//建仓金额
+	var ykzj=ykzj;//盈亏资金
+	var uprice=uprice;//产品单价
+	$.ajax({  
+        type: "post",  
+        url: "{:U('Detailed/updateore')}",    
+        data:{"oid":oid,"youjia":youjia,"bdyy":bdyy,"jiancj":jiancj,"ykzj":ykzj,'uprice':uprice},
+		async:false,
+        success: function(data) {
+        },  
+        error: function(data) {  
+        }
+        
+    }); 
+	return true;
+}*/
+function pcprice() { 
+	var yinprice1=0;//第一种产品的盈亏
+	var yinprice2=0;//第二种产品的盈亏
+	var yinprice3=0;//第三种产品的盈亏
+	
+	//获取当前所有油产品的盈亏
+	var ykzf = $(".ykzf");//第一种产品列表
+	ykzf.each(function(){
+		var youjia=parseFloat($('.yincangyoujia').html()).toFixed(2);//当前油价
+		if(youjia < 0){
+			return false;
+		}
+		var buyprice = parseFloat($(this).children(".buyprice").html()).toFixed(2);//当前产品的入仓价
+		var ykzfostyle = $(this).children(".ykzfostyle").html();//状态0是涨，1是跌
+		var ykzfeid = $(this).children(".ykzfeid").html(); //是否体验卷0不是，1是
+		var onumber = $(this).children(".onumber").html(); //购买手数
+		var ykzfwave = $(this).children(".ykzfwave").html();//波动
+		var uprice= $(this).children(".uprice").html();//单价
+		var pay=onumber*uprice;//保证金
+		var endprofit = $(this).children(".endprofit").html()/100;//止盈比例
+		var endloss = $(this).children(".endloss").html()/100;//止损比例
+		var oid = $(this).children(".oid").html();//订单id
+		if(ykzfeid==0){
+			if (ykzfostyle==0) {
+				var newprice1 = eval(youjia-buyprice)*ykzfwave*onumber;//当前盈亏
+			}else{
+				var newprice1 = eval(buyprice-youjia)*ykzfwave*onumber;//当前盈亏
+			};
+			var sum=eval(newprice1+'+'+pay);//当前订单保证金的金额
+			var ykzj=newprice1;
+			sum2=newprice1;
+			yinprice1 = sum2+yinprice1;
+			var newprice3 =sum2.toFixed(2);
+		}else{
+			 var newprice3 =0;
+		}
+		
+		if(youjia=="NaN"){
+			$(this).children(".Profit1").text("");
+		}else{
+			$(this).children(".Profit1").html(newprice3);
+			if(newprice3>=0){
+				$(this).children(".Profit1").css('color','#ed0000')
+			}else{
+				$(this).children(".Profit1").css('color','#2fb44e')
+			}
+		}     
+	});
+
+
+	//第二种产品列表
+	var ykzf1 = $(".ykzf1");
+	ykzf1.each(function(){
+		var youjia=parseFloat($('.ycbaiyinjia').html()).toFixed(2);//当前白银价
+		if(youjia < 0){
+			return false;
+		}
+		var buyprice1 = parseFloat($(this).children(".buyprice2").html()).toFixed(2);//当前产品的入仓价
+		var ykzfostyle = $(this).children(".ykzfostyle").html();//状态0是涨，1是跌
+		var ykzfeid = $(this).children(".ykzfeid").html();//是否体验卷0不是，1是
+		var onumber = $(this).children(".onumber").html();//数量
+		var ykzfwave = $(this).children(".ykzfwave").html();//波动
+		var uprice= $(this).children(".uprice").html();//单价
+		var pay=onumber*uprice;//保证金
+		var endprofit = $(this).children(".endprofit").html()/100;//止盈比例
+		var endloss = $(this).children(".endloss").html()/100;//止损比例
+		var oid = $(this).children(".oid").html();//订单id
+		if(ykzfeid==0){
+			if (ykzfostyle==0) {
+				var yinprice1 = eval(youjia-buyprice1)*ykzfwave*onumber;//现价-购买价*利率*手数当前盈亏
+			}else{
+				var yinprice1 = eval(buyprice1-youjia)*ykzfwave*onumber;//现价-购买价*利率*手数当前盈亏
+			};
+			var sum=eval(yinprice1+'+'+pay);//给数据库添加
+			var ykzj=yinprice1;
+			sum2=yinprice1;
+			yinprice2 = sum2+yinprice2;
+			var yinprice3 =sum2.toFixed(2);
+		}else{
+			var yinprice3 =0;
+		}
+		if(youjia=="NaN"){
+			$(this).children(".Profit2").text("");
+		}else{
+			$(this).children(".Profit2").html(yinprice3);
+			if(yinprice3>=0){
+				$(this).children(".Profit2").css('color','#ed0000')
+			}else{
+				$(this).children(".Profit2").css('color','#2fb44e')
+			}
+		}
+	});        
+
+	var ykzf2 = $(".ykzf2");
+	ykzf2.each(function(){
+		var youjia=parseFloat($('.yctojia').html()).toFixed(2);//当前铜价
+		if(youjia < 0){
+			return false;
+		}
+		var buyprice2 = parseFloat($(this).children(".buyprice3").html()).toFixed(2);//当前产品的入仓价
+		var ykzfostyle = $(this).children(".ykzfostyle").html();//状态0是涨，1是跌
+		var ykzfeid = $(this).children(".ykzfeid").html();//是否体验卷0不是，1是
+		var onumber = $(this).children(".onumber").html();//数量
+		var ykzfwave = $(this).children(".ykzfwave").html();//波动
+		var uprice= $(this).children(".uprice").html();//单价
+		var pay=onumber*uprice;//保证金
+		var endprofit = $(this).children(".endprofit").html()/100;//止盈比例
+		var endloss = $(this).children(".endloss").html()/100;//止损比例
+		var oid = $(this).children(".oid").html();//订单id
+		if(ykzfeid==0){
+			if (ykzfostyle==0) {
+				var newpr3 = (youjia-buyprice2)*ykzfwave*onumber;
+			}else{
+				var newpr3 = (buyprice2-youjia)*ykzfwave*onumber;
+			};
+			var sum=eval(newpr3+'+'+pay);//当前订单保证金的金额
+			var ykzj=newpr3;
+			sum2=newpr3;
+			yinprice3=sum2+yinprice3;
+			var  newpr4 = newpr3.toFixed(2);
+		}else{
+		  var newpr4 = 0;
+		}
+
+		if(youjia=="NaN"){
+			$(this).children(".Profit3").text("");	
+		}else{
+			$(this).children(".Profit3").html(newpr4);
+			if(newpr4>=0){
+					$(this).children(".Profit3").css('color','#ed0000')
+			}else{
+					$(this).children(".Profit3").css('color','#2fb44e')
+			}
+		}
+	});    
+
+	var picsum=Number(yinprice1+yinprice2+yinprice3).toFixed(2);
+	if(picsum=="NaN"){
+		$('.yk_con').html();
+	}else if(picsum>0){
+		$('.yk_con').html("+"+picsum);  
+	}else if(picsum<0){
+		$('.yk_con').html(picsum); 
+		$('.yk_con').css("color","yellow"); 
+	}
+}
+</script>
+<!--查看交易end  -->    
+ <script type="text/javascript">
+   $(".conform").click(function(){
+	$(this).attr("style","display:none");
+	 //商品id
+    var mypid=$('#type').val();
+	var mys=$('#sls').val();
+	if(mys > 10)
+	{
+		alert('此单可选最大手数为10手！');
+		return false;
+	}
+    //每个产品每天每人最多建仓15次
+	var h =1;
+	$.ajax({
+		type:'post',
+		url:"{:U('index/ifexceed')}",
+		data:{"mypid":mypid},
+		async:false, 
+		success:function(data){
+			if(eval(1+'+'+data.num) > 15)
+			{
+				alert("此商品您今天建仓次数已达上限！");
+				h = 2 ;
+			}
+			if(eval(mys+'+'+data.count) > 30)
+			{
+				alert("此商品您今天最多还能建仓手数"+data.scount+"次！");
+				h = 2;
+			}
+		}
+	});
+	if(h == 2)
+	{
+		return false;
+	}
+    //获取要提交的参数
+    //数量
+    var mysum=$('#sl').val();
+    //所用费用
+    var myfy=$('#opprice').html();
+    //方向
+    var myfx=$('#zhd').html();
+    //手续费
+    var mysxf=$('#j-5').html();
+    //入仓价
+	// var mygetpeice=$('#dangqianj').html();
+
+	if($('#dqcid').html()==1){
+		var mygetpeice=$('#ydangqianj').html();
+	}else if($('#dqcid').html()==2){
+		var mygetpeice=$('#bdangqianj').html();
+	}else{
+		var mygetpeice=$('#tdangqianj').html();
+	}
+    var mytyj=$('#isJuan').val();
+    if(mygetpeice > 0 && mypid > 0)
+    { 
+      //体验卷值
+            $.ajax({
+                type:'post',
+                url:"{:U('Detailed/addorder')}",
+                data:{"mysum":mysum,"myfy":myfy,"myfx":myfx,"mysxf":mysxf,"mytyj":mytyj,"mypid":mypid,"mygetpeice":mygetpeice},
+				async:false,
+                success:function(data){
+                  if (data==100) {
+                      alert("当前不在建仓时间内！");
+                  }else{
+              	     //window.location.href="{:U('Detailed/orderid')}?orderid="+data+"&marker=first";
+              	     window.location.href="{:U('Index/index')}";
+                  }
+                }
+            });
+
+    }
+    });    
+ </script> 
+ <script type="text/javascript">
+   
+setInterval('puttxt()', 5000);
+function puttxt(){
+ 
+  var youjia=$("#youjia").html();
+  var baiyinjia=$("#baiyinjia").html();
+  var tojia=$("#tojia").html();
+             $.ajax({
+                type:'post',
+                url:"{:U('Index/puttxt')}",
+                data:{"youjia":youjia,"baiyinjia":baiyinjia,"tojia":tojia},
+                success:function(data){
+ 
+                }
+            });
+}
+
+
+ </script>
+<!-- <script type="text/javascript" src="__JS__/echarts-plain.js"></script> -->
+<script src="__JS__/idangerous.swiper.min.js"></script>
+<script src="__JS__/fastclick.js"></script>
+<script>
+    
+	
+	var mySwiper = new Swiper('.swiper2', {
+        paginationClickable: true,
+        centeredSlides: true,
+        slidesPerView:1.5,
+        watchActiveIndex: true
+    });
+  var mySwiper = new Swiper('.swiper1', {
+        paginationClickable: true,
+        centeredSlides: true,
+        slidesPerView:1.5,
+        watchActiveIndex: true
+    });
+      
+  var mySwiper = new Swiper('.swiper3', {
+        paginationClickable: true,
+        centeredSlides: true,
+        slidesPerView:1.5,
+        watchActiveIndex: true
+    });
+    
+	//若给元素加none类隐藏会影响swiper加载
+ //若给元素加none类隐藏会影响swiper加载
+    //$(".sd").addClass("none");
+	  setTimeout('$(".sd").addClass("none")',1000);
+
+	$("#shuoming").click(function(){
+	   $("#sm").show();
+	   $(".mask1").show();
+	});
+	$(".back1").click(function(){
+	    $("#sm").hide();
+	    $(".mask1").hide();
+	
+	});
+
+	</script>
+  <script src="__JS__/script.js"></script>
+  <script>
+	setInterval('butt1()', 2000);
+	setInterval('butt2()', 2000);
+	setInterval('butt3()', 2000);
+	setInterval('rate_new()', 10000);
+	setInterval('reloadye()', 1000);
+	function reloadye(){
+		$.ajax({
+			url: "{:U('Index/autoref')}",
+			async:false,  
+			success: function(data){
+				var c = $("#counts").val();
+				if(data != c){
+					window.location.reload();
+				}
+			}
+		  });
+	}
+      function rate_new(){
+
+		 $.ajax({
+			url: "{:U('Index/newrate')}",
+			async:false,  
+			success: function(result){
+				$("#rate1").val(result['0']['rate']);
+				$("#rate2").val(result['1']['rate']);
+				$("#rate3").val(result['2']['rate']);
+			 
+			}
+		  });
+      }
+
+
+
+
+         $('.blue').click(function(){
+			//className = $(this).attr('class');
+			var onumber = $(this).attr('data-onumber');
+			var zy = $(this).attr('data-zy');
+			var zk = $(this).attr('data-zk');
+			$('.qrsl').text(onumber);
+			$('#buyid').val($(this).attr('data-oid'));
+			$('zy').val(zy);
+			$('zk').val(zk);
+			$('.toclearfix li').each(function(){
+				if($(this).val()==zy) {
+					$(".toclearfix  li").eq($(this).index()).addClass("selected").siblings().removeClass("selected");
+				};
+			});
+			$('.myclearfix li').each(function(){
+				if ($(this).val()==zk) {
+					$(".myclearfix  li").eq($(this).index()).addClass("selected").siblings().removeClass("selected");
+				};
+			});
+			$('#dialogBg2').fadeIn(200);
+	    	$('#dialog2').removeAttr('class').addClass('animated bounceIn').fadeIn(200);
+		})
+		//关闭弹窗
+	 	$('#claseDialogBtn2').click(function(){
+		   	$('#dialogBg2').fadeOut(200,function(){
+		    	$('#dialog2').addClass('bounceOutUp').fadeOut(200);
+		    });
+		});
+		function openpay(oid,pe,expend){
+			var openpay = $('.openpay');
+			var newprice,ploss,wine,bfb;
+			if(openpay){
+				openpay.each(function(){
+					if($(this).find('.oid').text()==oid){
+						ploss = $(this).find('.ploss').text();
+						newprice = $(this).find('.latest-price').text();
+						wine = parseFloat(ploss*1+expend*1,2);
+						bfb = parseFloat(ploss/expend*100,2);
+					}
+				})
+				if(newprice>=pe){
+					$('.payprice').html('<em class="rise" id="payprice">'+newprice+'</em>');
+				}else{
+					$('.payprice').html('<em class="drop" id="payprice">'+newprice+'</em>');
+				}
+				$('.payploss').html(ploss+'('+bfb+'%)');
+				$('.comiss').text(wine);
+				if(ploss<0){
+					$('.payploss').css('color','#2fb44e');
+				}else{
+					$('.payploss').css('color','#ed0000');
+				}
+				
+			}
+			
+		}
+		//关闭弹窗
+	 	$('#claseDialogBtn3').click(function(){
+		   	$('#dialogBg3').fadeOut(200,function(){
+		    	$('#dialog3').addClass('bounceOutUp').fadeOut(200);
+		    });
+		});
+		$('.payout').click(function(){
+		   	$('#dialogBg3').fadeOut(200,function(){
+		    	$('#dialog3').addClass('bounceOutUp').fadeOut(200);
+		    });
+		});
+		
+  </script>
+</block>

@@ -1,0 +1,203 @@
+[ 2016-12-09T22:51:04+08:00 ] ::1 /mipan/index.php?_ijt=viu29hcg59g90hj8kpqqk8d5e2
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001393s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.016337s ]
+
+[ 2016-12-09T22:51:04+08:00 ] ::1 /mipan/Home/User/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000925s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001708s ]
+
+[ 2016-12-09T23:00:13+08:00 ] ::1 /mipan/index.php
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001297s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002190s ]
+
+[ 2016-12-09T23:00:13+08:00 ] ::1 /mipan/Home/User/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000700s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001313s ]
+
+[ 2016-12-09T23:10:52+08:00 ] ::1 /mipan/index.php
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001482s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002359s ]
+
+[ 2016-12-09T23:10:52+08:00 ] ::1 /mipan/Home/User/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000683s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001408s ]
+
+[ 2016-12-09T23:11:37+08:00 ] ::1 /mipan/index.php
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001138s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001845s ]
+
+[ 2016-12-09T23:11:47+08:00 ] 127.0.0.1 /mipan/Home/User/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000663s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001145s ]
+
+[ 2016-12-09T23:12:05+08:00 ] 127.0.0.1 /mipan/Home/User/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000747s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001316s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:12:25+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000913s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001518s ]
+
+[ 2016-12-09T23:12:30+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000690s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001232s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:12:31+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000813s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001348s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:12:37+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000666s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001230s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:12:38+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000660s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001116s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:12:39+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000654s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001103s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:12:46+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001182s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001841s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:13:46+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001053s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001583s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:13:54+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000949s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001581s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:14:13+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000901s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001499s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:33:44+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=jyURg6c%2FI%2BCY0lF8bXjQA6SFG2XSd%2F38E8e6fUEIEAi6UkNoRB4q6KAsKs%2BmtPbD0V0pbRC%2FqNL1Rys0fWAVF0x7%2By5CXI3sEJWcvric53HqK7Z2Fvfg2BKCjqlwpmh9%2FMGXPpNLsx%2BlUnk%2F9%2FBfNNR4jSpqdou2Ca6u25WsOWfLfeIDxPcIxMU1LPR6%2Bh%2Bn
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000811s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001320s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:33:51+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=jyURg6c%2FI%2BCY0lF8bXjQA6SFG2XSd%2F38E8e6fUEIEAi6UkNoRB4q6KAsKs%2BmtPbD0V0pbRC%2FqNL1Rys0fWAVF0x7%2By5CXI3sEJWcvric53HqK7Z2Fvfg2BKCjqlwpmh9%2FMGXPpNLsx%2BlUnk%2F9%2FBfNNR4jSpqdou2Ca6u25WsOWfLfeIDxPcIxMU1LPR6%2Bh%2Bn
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000774s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001311s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:33:55+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=jyURg6c%2FI%2BCY0lF8bXjQA6SFG2XSd%2F38E8e6fUEIEAi6UkNoRB4q6KAsKs%2BmtPbD0V0pbRC%2FqNL1Rys0fWAVF0x7%2By5CXI3sEJWcvric53HqK7Z2Fvfg2BKCjqlwpmh9%2FMGXPpNLsx%2BlUnk%2F9%2FBfNNR4jSpqdou2Ca6u25WsOWfLfeIDxPcIxMU1LPR6%2Bh%2Bn
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001071s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001625s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:34:08+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=jyURg6c%2FI%2BCY0lF8bXjQA6SFG2XSd%2F38E8e6fUEIEAi6UkNoRB4q6KAsKs%2BmtPbD0V0pbRC%2FqNL1Rys0fWAVF0x7%2By5CXI3sEJWcvric53HqK7Z2Fvfg2BKCjqlwpmh9%2FMGXPpNLsx%2BlUnk%2F9%2FBfNNR4jSpqdou2Ca6u25WsOWfLfeIDxPcIxMU1LPR6%2Bh%2Bn
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000934s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001440s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:34:29+08:00 ] 127.0.0.1 /mipan/index.php
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000824s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001403s ]
+
+[ 2016-12-09T23:36:38+08:00 ] 127.0.0.1 /mipan/Home/User/login.html
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001130s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001824s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:36:58+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=am16YiFFw7Iv0ssY5xv7%2FdMoRu0UZy0dfE6JZQkysK9ulejW7e%2FGTO0f3mLLbIVA63v0DWFKUxPwLbGQ2yDSinKGN8VLFlaLSPgkg28WOiunOJ1WjTOP4I6YyRJFF5UzJ5BBfnw00mGKak7pAsZA%2Bg3uwMTdyWkd1wZyoghz2SyaGDCMY1xrXamSsz%2FGEzp%2B
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000714s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001198s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+
+[ 2016-12-09T23:56:34+08:00 ] 127.0.0.1 /mipan/Home/User/login.html?nsukey=jyURg6c%2FI%2BCY0lF8bXjQA6SFG2XSd%2F38E8e6fUEIEAi6UkNoRB4q6KAsKs%2BmtPbD0V0pbRC%2FqNL1Rys0fWAVF0x7%2By5CXI3sEJWcvric53HqK7Z2Fvfg2BKCjqlwpmh9%2FMGXPpNLsx%2BlUnk%2F9%2FBfNNR4jSpqdou2Ca6u25WsOWfLfeIDxPcIxMU1LPR6%2Bh%2Bn
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001023s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001668s ]
+NOTIC: [8] Undefined index: wxopenid D:\phpStudy\WWW\mipan\Application\Home\Controller\UserController.class.php 第 60 行.
+NOTIC: [2] mysql_close(): no MySQL-Link resource supplied D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db.class.php 第 901 行.
+NOTIC: [2] mysql_connect(): Access denied for user 'root'@'localhost' (using password: YES) D:\phpStudy\WWW\mipan\ThinkPHP\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+ERR: Access denied for user 'root'@'localhost' (using password: YES)
+

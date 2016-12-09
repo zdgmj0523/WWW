@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<title>米微盘</title>
+
+<link rel="stylesheet" type="text/css" href="__CSS__/cd.css" />
+<link rel="stylesheet" type="text/css" href="__CSS__/foot.css" />
+<script language="javascript" type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="__JS__/cd.js"></script>
+<script language="javascript" type="text/javascript" src="__JS__/common.js"></script>
+</head>
+<body>
+<!--顶部开始-->
+<div class="top_div">
+      <div class="cdan_div"><img src="__IMG__/cdan.png" width="35" height="32"/></div>
+      <div class="jypt_div">
+    <h1 style="line-height:2.1em"></h1>
+  </div>
+<div id="commonbao" status="1"></div>
+</div>
+<div class="dbjjDiv"></div>
+<div class="ycdcdDiv">
+      <div class="gbtb"><img src="__IMG__/gbtb.png"/></div>
+      <ul>
+  <li><a href="/index.php/Home/Index/"><span><img src="__IMG__/jygz.png"/></span><span>首页</span></a></li>
+    <li><a href="{:U('User/recharge')}"><span><img src="__IMG__/cz.png"/></span><span>充值</span></a></li>
+    <li><a href="{:U('User/cash')}"><span><img src="__IMG__/tx.png"/></span><span>提现</span></a></li>
+    <li><a href="{:U('Detailed/dtrading')}"><span><img src="__IMG__/jyls.png"/></span><span>交易历史</span></a></li>
+    <li><a href="{:U('Detailed/drevenue')}"><span><img src="__IMG__/szmx.png"/></span><span>收支明细</span></a></li>
+    <li><a href="{:U('User/memberinfo')}"><span><img src="__IMG__/grxx.png"/></span><span>个人中心</span></a></li>
+	<if condition="$Think.session.uotype gt 0">
+    <li><a href="{:U('User/img')}"><span><img src="__IMG__/fxhy.png"/></span><span>分享好友</span></a></li>
+	<li><a href="{:U('User/recommend')}"><span><img src="__IMG__/fxhy.png"/></span><span>我的推广</span></a></li>
+	</if>
+    <li><a href="{:U('User/ranking')}"><span><img src="__IMG__/phb.png"/></span><span>排行榜</span></a></li>
+    <li><a href="{:U('User/logout')}"><span><img src="__IMG__/cs.png"/></span><span>退出</span></a></li>
+    
+  </ul>
+</div>
+<!--顶部结束-->
+<input id="jianceid" value="{$Think.session.uid}" style="display:none"/>
+<div class="main"> 	
+		<block name="content"></block>
+		<block name="footers">
+			<div class="footerart">
+					<if condition=" '__ACTION__' eq '/Home/Index/index'">
+					<div class="fontart">
+						<a style="color:#fff" href="/index.php/Home/Index/"><!--img style="width:3em" src="__IMG__/xz/tu_1.png"/--><br/><em style="font-size:1.5em;color:#E1A22C">首页</em></a>
+					</div>
+					<else/>
+					<div class="fontart">
+						<a style="color:#fff" href="/index.php/Home/Index/"><!--img style="width:3em" src="__IMG__/wx/tu_1.png"/--><br/><em style="font-size:1.5em;color:#fff">首页</em></a>
+					</div>
+					</if>
+					
+				
+				
+					<if condition=" '__ACTION__' eq '/Home/Detailed/dtrading'">
+					<div class="fontart">
+						<a style="color:#fff" href="/index.php/Home/Detailed/dtrading"><!--img style="width:3em" src="__IMG__/xz/tu_2.png"/--><br/><em style="font-size:1.5em;color:#E1A22C">交易明细</em></a>
+						</div>
+					<else/>
+					<div class="fontart">
+						<a style="color:#fff" href="/Home/Detailed/dtrading"><!--img style="width:3em" src="__IMG__/wx/tu_2.png"/--><br/><em style="font-size:1.5em;color:#fff">交易明细</em></a>
+						</div>
+					</if>
+				
+				
+					<if condition=" '__ACTION__' eq '/Home/News/news'">
+					<div class="fontart">
+						<a style="color:#fff" href="/index.php/Home/News/news"><!--img style="width:3em" src="__IMG__/xz/tu_3.png"/--><br/><em style="font-size:1.5em;color:#E1A22C">公告</em></a>
+						</div>
+					<else/>
+					<div class="fontart">
+						<a style="color:#fff" href="/index.php/Home/News/news"><!--img style="width:3em" src="__IMG__/wx/tu_3.png"/--><br/><em style="font-size:1.5em;color:#fff">公告</em></a>
+					</div>
+					</if>
+				
+				
+					<if condition=" '__ACTION__' eq '/Home/User/memberinfo'">
+					<div class="fontart">
+						<a style="color:#fff" href="/index.php/Home/User/memberinfo"><!--img style="width:3em" src="__IMG__/xz/tu_4.png"/--><br/><em style="font-size:1.5em;color:#E1A22C">帐户</em></a>
+						</div>
+					<else/>
+					<div class="fontart">
+						<a style="color:#fff" href="/index.php/Home/User/memberinfo"><!--img style="width:3em" src="__IMG__/wx/tu_4.png"/--><br/><em style="font-size:1.5em;color:#fff">帐户</em></a>
+						</div>
+					</if>
+				
+			</div>
+		</block>
+</div> 		
+</body>
+</html>
