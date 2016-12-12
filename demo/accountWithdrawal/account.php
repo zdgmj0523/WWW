@@ -65,14 +65,14 @@
         </table>
     </div>
 </form>
-<div style="left: 650px;position: absolute;top: 10px;width: 300px">
+<div style="left: 650px;position: absolute;top: 10px">
     <p id="message"></p>
     <p id="respCode"></p>
     <p id="payStatus"></p>
     <p id="transStatus"></p>
 </div>
 <br>
-<div style="left: 650px;position: absolute;width: 300px">
+<div style="left: 650px;position: absolute">
     <p id="Vmessage"></p>
     <p id="VrespCode"></p>
     <p id="VpayStatus"></p>
@@ -103,7 +103,7 @@
     </table>
 </form>
 <br>
-<div style="left: 650px;position: absolute;width: 300px">
+<div style="left: 650px;position: absolute">
     <p id="Bmessage"></p>
     <p id="BrespCode"></p>
     <p id="amount"></p>

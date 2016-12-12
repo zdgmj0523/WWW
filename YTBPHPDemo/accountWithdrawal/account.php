@@ -65,14 +65,14 @@
         </table>
     </div>
 </form>
-<div style="left: 650px;position: absolute;top: 10px;width: 300px">
+<div style="left: 650px;position: absolute;top: 10px">
     <p id="message"></p>
     <p id="respCode"></p>
     <p id="payStatus"></p>
     <p id="transStatus"></p>
 </div>
 <br>
-<div style="left: 650px;position: absolute;width: 300px">
+<div style="left: 650px;position: absolute">
     <p id="Vmessage"></p>
     <p id="VrespCode"></p>
     <p id="VpayStatus"></p>
@@ -103,7 +103,7 @@
     </table>
 </form>
 <br>
-<div style="left: 650px;position: absolute;width: 300px">
+<div style="left: 650px;position: absolute">
     <p id="Bmessage"></p>
     <p id="BrespCode"></p>
     <p id="amount"></p>
@@ -111,7 +111,7 @@
 <form name="form" method="post" style="width:600px" target="_blank">
     <table width="600"  border="1" cellspacing="0" cellpadding="0">
         <tr>
-            <th colspan="2" scope="col">代付查询</th>
+            <th colspan="2" scope="col">虚拟账户余额查询</th>
         </tr>
         <tr>
             <td>虚拟账号</td>

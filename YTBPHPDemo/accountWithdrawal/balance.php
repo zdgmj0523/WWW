@@ -7,7 +7,7 @@
  */
 $md5=md5('cardno='.$_POST['cardno'].'&key='.$_POST['merchKey']);
 $reveiveData='cardno='. $_POST['cardno'].'&signature'.'='.$md5;
-$url = "http://112.74.230.8:8083/posp-settle/balance.do";
+$url = "http://120.25.96.46:8083/posp-settle/balance.do";
 $curl = curl_init();
 //设置抓取的url
 curl_setopt($curl, CURLOPT_URL, $url);
