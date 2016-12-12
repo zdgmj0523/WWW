@@ -21,10 +21,6 @@ $(function () {
     })
     
 })
-function mySubmit() {
-    alert(123);
-}
-
 
 
 function ceshi() {

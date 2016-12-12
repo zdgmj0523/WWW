@@ -10,27 +10,26 @@ $post_data = array(
     'traceno' => $_POST['traceno']
 );
 $temp='';
-//ksort($post_data);//对数组进行排序
 //遍历数组进行字符串的拼接
 foreach ($post_data as $x=>$x_value){
     $temp = $temp.$x."=".$x_value."&";
 }
-//iconv('UTF-8','GBK//IGNORE',$_POST['accountName'])
 $md5=md5($temp.'key='.$_POST['merchKey']);
-$post_datas=array_merge($post_data,array('signature'=>$md5));
-?>
-
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-    <title></title>
-</head>
-<body onload="document.form.submit();">
-<form name="form" method="post" action="http://120.25.96.46:8083/posp-settle/virtOrder.do" target="_self">
-    <input  type="hidden" name="cardno" value="<?php echo $_POST['cardno']; ?>" />
-    <input  type="hidden" name="traceno" value="<?php echo $_POST['traceno']; ?>" />
-    <input  type="hidden" name="signature" value="<?php echo $post_datas['signature']; ?>" />
-</form>
-
-</body>
-</html>
+$reveiveData=$temp.'signature'.'='.$md5;
+$url = "http://120.25.96.46:8083/posp-settle/virtOrder.do";
+$curl = curl_init();
+//设置抓取的url
+curl_setopt($curl, CURLOPT_URL, $url);
+//设置头文件的信息作为数据流输出
+curl_setopt($curl, CURLOPT_HEADER, false);
+//设置获取的信息以文件流的形式返回，而不是直接输出。
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+//设置post方式提交
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $reveiveData);
+//执行命令
+$data = curl_exec($curl);
+//关闭URL请求
+curl_close($curl);
+//显示获得的数据
+echo iconv('GBK//IGNORE', 'UTF-8', $data);

@@ -1,0 +1,167 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/pwd.css">
+<div class="wrap">
+  <div class="index loginbg" style="min-height: 500px;">
+    <header class="list-head">
+		<nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+			<h3 class="list-title">忘记密码</h3>
+		</nav>
+    </header>
+    <!--if condition="$openid eq ''"-->
+    <form id="reviseForm" class="i-form" method="post"  >  <!-- action="{:U('User/register')}" -->
+        <input type="hidden" name="oid" value="{$oid}">
+          <input type="hidden" name="uid" value="{$uid}">
+      <ul class="form-box">
+        <li class="f-line clearfix">
+          <label class="f-label">手机号</label>
+          <input id="c-pho" class="f-input text" type="text" maxlength="11" placeholder="请输入手机号码" name="utel">
+        </li>
+        <li class="f-line clearfix">
+          <label class="f-label">新密码</label>
+          <input id="r-pwd" class="f-input text" type="password" maxlength="15" placeholder="输入六位新密码" name="repassword">
+        </li>
+		<li class="f-line clearfix">
+          <label class="f-label">短信验证码</label>
+          <input id="c-pwd" class="f-input2 text" type="text " maxlength="6" placeholder="请输入短息验证码" name="code">
+          <input type="button" value="获取验证码" id="mes" onclick="get_mobile_code()" class="f-sub2"><br />
+        </li>
+		<li class="f-line clearfix">
+          <label class="f-label"></label>
+          <span id="regvif"></span>
+        </li>
+      </ul>
+		<div id='btnAgree' class="fr">
+			<div style="float:left;width:100%"><input name="agree" type="checkbox" value="1" class="text"  id="check" checked/>&nbsp;<span>我已阅读和同意<span id='btnBook'>《服务协议及隐私条款》</span></span>
+			</div>
+			<div style="height:100px;overflow:scroll;border: 1px solid #d0d0d0;display: none" id="panel">
+              内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+              内容内容内容内容内容内容内容<br>
+			</div>
+		</div>
+		<div style="float:left;width:100%">
+			<button type="botton" class="f-sub fl" style="width:100%;background:#d82c2c" id='send'/>密码修改</button>
+			<!--a href="{:U('User/login')}"><input type="submit" value="返回登录" class="f-sub fr" style=" width: 43%; background: #00b7b7;" ></a-->
+		</div>
+      <!--div class="forgot"><span class="fl"><a href="{:U('User/login')}">已有账号，立即登录</a></span></div-->
+    </form>
+  </div>
+</div>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script src="__JS__/script.js"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/sea.js" async=""></script>
+<script language="javascript">
+	function get_mobile_code(){
+        $.post(
+		'__URL__/outsmsverify', 
+		{mobile:jQuery.trim($('#c-pho').val())}, function(msg) {
+            alert(jQuery.trim(msg));
+			if(msg=='提交成功'){
+				RemainTime();
+			}
+        });
+	};
+	var iTime = 59;
+	var Account;
+	function RemainTime(){
+		document.getElementById('mes').disabled = true;
+		var iSecond,sSecond="",sTime="";
+		if (iTime >= 0){
+			iSecond = parseInt(iTime%60);
+			iMinute = parseInt(iTime/60)
+			if (iSecond >= 0){
+				if(iMinute>0){
+					sSecond = iMinute + "分" + iSecond + "秒";
+				}else{
+					sSecond = iSecond + "秒";
+				}
+			}
+			sTime=sSecond;
+			if(iTime==0){
+				clearTimeout(Account);
+				sTime='获取手机验证码';
+				iTime = 59;
+				document.getElementById('mes').disabled = false;
+			}else{
+				Account = setTimeout("RemainTime()",1000);
+				iTime=iTime-1;
+			}
+		}else{
+			sTime='没有倒计时';
+		}
+		document.getElementById('mes').value = sTime;
+	}	
+</script>
+<style type="text/css">
+  .formtips{
+      text-align:center;
+      width: 100%;
+  }
+</style>
+ <script type="text/javascript">
+
+	//提交，最终验证。
+	$('#send').click(function(){
+		var pho = $("#c-pho").val();
+		var code= $("#c-pwd").val();
+		var pwd= $("#r-pwd").val();
+		if(pho == "")
+		{
+			$('#regvif').html("请输入手机号！");
+			$("#regvif").attr("style","color:red");
+			return false;
+		}
+		if(code == ""){
+			$('#regvif').html("请输入验证码！");
+			$("#regvif").attr("style","color:red");
+			return false;
+		}
+		if(pwd == ""){
+			$('#regvif').html("请输入新密码！");
+			$("#regvif").attr("style","color:red");
+			return false;
+		}
+		$.ajax({  
+			type: "post",  
+			url: "{:U('User/chanoutpwd')}",
+			data:{'pho':pho,'code':code,'pwd':pwd},
+			async:false,  
+			success: function(data) { 
+				if(data==1){
+					alert("密码修改成功！");
+					window.location.href="__URL__/login";
+					return false;
+				}
+				if(data==2){
+					alert("密码修改失败！");return false;
+				}
+				if(data==3){
+					alert("验证码错误！");return false;
+				}
+			},  
+ 
+		});
+	});
+	//服务条款效果
+	$("#btnBook").click(function(){
+		$("#panel").slideToggle("slow");
+	});
+</script>
+
+</block>
+<block name="footers"></block>

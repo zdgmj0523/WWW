@@ -1,0 +1,14 @@
+<script language="javascript" type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script>
+	function au()
+	{
+		$.ajax({
+			type:'post',
+			url:"{:U('news/autogetdatanow')}",   
+			success:function(data){
+				
+			}
+		});
+	}
+	setInterval('au()', 1000);
+</script>

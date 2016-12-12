@@ -1,0 +1,108 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/pwd.css">
+<div class="wrap">
+  <div class="index loginbg" style="height:630px;background:url('__IMG__/tu-1.gif') no-repeat 0% 0%;">
+  <if condition="$is_weixin eq 0">
+    <header class="list-head">
+		<nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+			<h3 class="list-title">登陆</h3>
+		</nav>
+    </header>
+	<div style="text-align:center;margin-top:1em;color:#fff">
+		<img style="width:8em" src="__IMG__/logo8.png" />
+	</div>
+      <!-- 普通浏览器登录 -->
+        <form id="reviseForm" class="i-form" method="post" action="{:U('User/login')}">
+          <ul class="form-box">
+               <li class="f-line clearfix" id="wxzh">
+                <label class="f-label" style="color:#fff">用户名</label>
+                <input id="c-pwd" class="f-input" type="text" maxlength="20" placeholder="请输入账号" name="username">
+               </li>
+            <li class="f-line clearfix">
+              <label class="f-label" style="color:#fff">密码</label>
+              <input id="n-pwd" class="f-input" type="password" maxlength="20" placeholder="请输入密码" name="password">
+            </li>
+          </ul>
+		  <!--div style="background:#666;opacity:0.4;height:4em;position:relative;bottom:-4em;Z-index:5"></div-->
+		  <input type="submit" style="background-color:#FF4400;position:relative;Z-index:10" value="立即登录" class="f-sub"/>
+          <div class="forgot"><span class="fl"></span>
+          <a href="{:U('User/outpwd')}">忘记密码</a></span>
+          <span class="fr"><a href="{:U('User/reg')}">免费注册</a></span></div>
+        </form>
+     </if> 
+ <if condition="$is_weixin eq 2">
+      <header class="list-head">
+      <nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+        <h3 class="list-title">登录</h3>
+      </nav>
+     </header>
+      <!-- 微信浏览器登录 -->
+         <form id="reviseForm" class="i-form" method="post" action="{:U('User/login')}">
+          <ul class="form-box">
+                <li class="f-line clearfix" style="display:none">
+                <label class="f-label" style="color:#fff">用户名</label>
+                <input id="c-pwd" class="f-input" type="text" value="{$username}" maxlength="20" placeholder="请输入账号" name="username">
+               </li>
+            <li class="f-line clearfix">
+              <label class="f-label" style="color:#fff">密码</label>
+              <input id="n-pwd" class="f-input" type="password" maxlength="20" placeholder="请输入密码" name="password">
+            </li>
+          </ul>
+		  <!--div style="background:#666;opacity:0.4;height:4em;position:relative;bottom:-4em;Z-index:-5"></div-->
+          <input type="submit" style="background-color:#FF4400;position:relative;Z-index:10" value="立即登录" class="f-sub"/>
+          <div class="forgot"><span class="fl"></span><span class="fr"></span></div>
+        </form>
+    </if> 
+	<input id="wxopenid" type="hidden" value="{$Think.session.wxopenid}" />
+  </div>
+</div>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script src="__JS__/script.js"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/sea.js" async=""></script>
+<script>
+	$(document).ready(function() {   
+		var isMobile = {  
+			Android: function() {  
+				return navigator.userAgent.match(/Android/i) ? true : false;  
+			},  
+			BlackBerry: function() {  
+				return navigator.userAgent.match(/BlackBerry/i) ? true : false;  
+			},  
+			iOS: function() {  
+				return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;  
+			},  
+			Windows: function() {  
+				return navigator.userAgent.match(/IEMobile/i) ? true : false;  
+			},  
+			any: function() {  
+				return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());  
+			}  
+		}
+		if(isMobile.any()){
+			var openid = $("#wxopenid").val();
+			var username = "{$Think.session.husername}";
+			if(!username)
+			{
+				if(!openid){
+					var appid = "wx557151ce56876f4d";
+					var url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+appid+"&redirect_uri=http://mipan.fxicc.com/Home/User/oauth2&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+					//window.location.href = url;
+				}
+			}else{
+				$("#wxzh").hide();
+			}
+		}else{
+			//alert("请你在微信端打开!");
+			//window.opener=null;
+			//window.open('','_self');
+			//window.close();
+			//window.location.href = window.location.href;
+		}
+	});  
+	
+</script>
+</block>
+<block name="footers"></block>
